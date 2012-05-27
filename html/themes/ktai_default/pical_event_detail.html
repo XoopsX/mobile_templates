@@ -1,0 +1,30 @@
+<{$detail_body}>
+
+<div style="text-align: right; padding: 0px; margin: 0px;">
+  <a href="<{$print_link}>" target="_blank"><img src="<{$skinpath}>/print.gif" alt="<{$lang_print}>" title="<{$lang_print}>" border="0" /></a>
+</div>
+
+<{if $moduleConfig.comment_dirname}>
+<{d3comment mydirname=$xoops_dirname id=$com_itemid subject=$xoops_default_comment_title class="piCalD3commentContent"}>
+
+<{else}>
+  <div style="text-align: center; padding: 3px; margin: 3px;">
+  <{$commentsnav}>
+  <{$lang_notice}>
+</div>
+
+<div style="margin: 3px; padding: 3px;">
+<!-- start comments loop -->
+<{if $comment_mode == "flat"}>
+  <{include file="db:system_comments_flat.html"}>
+<{elseif $comment_mode == "thread"}>
+  <{include file="db:system_comments_thread.html"}>
+
+<{elseif $comment_mode == "nest"}>
+  <{include file="db:system_comments_nest.html"}>
+<{/if}>
+<!-- end comments loop -->
+</div>
+<{/if}>
+
+<{include file='db:system_notification_select.html'}>

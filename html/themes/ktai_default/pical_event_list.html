@@ -1,0 +1,61 @@
+<{strip}>
+      <{* HEADER *}>
+
+            <{$cat_desc}>
+
+                <{* CATEGORY SELECT FORM *}>
+                  <{$categories_selform}>
+                  <img src='<{$images_url}>/spacer.gif' alt='' width='8' height='4' />
+
+                <{* DATE DESCRIPTION *}>
+                  <img src='<{$images_url}>/spacer.gif' alt='' width='350' height='4' /><br />
+                  <form action='<{$mod_url}>/index.php?smode=List&amp;num=<{$num}>&amp;cid=<{$now_cid}>&amp;order=<{$order}>' method='POST' style='margin:0px;'>
+                    <font size='4' color='<{$calhead_color}>'><span class='calhead'><{$ymdo_selects}><input type='submit' name='pical_jumpcaldate' value='<{$lang_button_jump}>' /></font></span></font><br />
+                  </form>
+                  <img src='<{$images_url}>/spacer.gif' alt='' width='350' height='4' />
+
+
+                  <{* ICONS *}>
+                  <img src='<{$images_url}>/spacer.gif' alt='' width='128' height='4' /><br />
+                  <a href='<{$get_target}>?cid=<{$now_cid}>&amp;smode=Yearly&amp;caldate=<{$caldate}>'><img src='<{$images_url}>/year_on.gif' border='0' width='30' height='24' alt='<{$alt_yearly}>' title='<{$alt_yearly}>' /></a>
+                  <a href='<{$get_target}>?cid=<{$now_cid}>&amp;smode=Monthly&amp;caldate=<{$caldate}>'><img src='<{$images_url}>/month_on.gif' border='0' width='30' height='24' alt='<{$alt_monthly}>' title='<{$alt_monthly}>' /></a>
+                  <a href='<{$get_target}>?cid=<{$now_cid}>&amp;smode=Weekly&amp;caldate=<{$caldate}>'><img src='<{$images_url}>/week_on.gif' border='0' width='30' height='24' alt='<{$alt_weekly}>' title='<{$alt_weekly}>' /></a>
+                  <a href='<{$get_target}>?cid=<{$now_cid}>&amp;smode=Daily&amp;caldate=<{$caldate}>'><img src='<{$images_url}>/day_on.gif' border='0' width='30' height='24' alt='<{$alt_daily}>' title='<{$alt_daily}>' /></a>
+
+      <br />
+      <hr />
+      <br />
+<form name='MainForm' action='<{$mod_url}>/index.php' target='_blank' method='post' style='margin:0px;'>
+	<{$page_nav_info}> <{$page_nav}> <{$lang_submitter}> <{$lang_startdatetime}> <{$lang_enddatetime}> <{$lang_summary}> <{$lang_rrule}> <{$lang_admission}> <input type='checkbox' name='dummy' onclick="with(document.MainForm){for(i=0;i<length;i++){if(elements[i].type=='checkbox'){elements[i].checked=this.checked;}}}" />
+<UL>
+        <!-- Start event loop -->
+        <{foreach item='event' from=$events}>
+        <li>
+          <a href='<{$mod_url}>/index.php?action=View&amp;event_id=<{$event.id}>'><{$event.summary}></a><br>
+          <{$smarty.const._PICAL_TH_SUBMITTER}> <{$event.submitter_info}><br>
+          <{$event.start_date_desc}>¡Á<{$event.end_date_desc}><br>
+          <{$event.rrule}>  <{$event.admission}><br>
+            <{if $event.editable == true}><a href='<{$get_target}>?smode=Daily&amp;action=Edit&amp;event_id=<{$event.id}>&amp;caldate=<{$caldate}>'><img src='<{$images_url}>/addevent.gif' border='0' width='14' height='12' /><{$lang_editevent}></a><{/if}><br>
+          
+          <input type='checkbox' name='ids[]' value='<{$event.target_id}>' /><br>
+        </li>
+        <{/foreach}>
+        <!-- End event loop -->
+
+        <{if $user_can_output_ics }>
+            <{$lang_checkeditems}> &nbsp; <{$lang_icalendar_output}><input type='submit' name='output_ics_confirm' value='<{$lang_button_export}>' />
+        <{/if}>
+
+	<img src='<{$images_url}>/spacer.gif' alt='' width='10' height='10' />
+          <{$pical_copyright}>
+        <{if $for_print <> true}>
+
+	<img src='<{$images_url}>/spacer.gif' alt='' width='10' height='10' />
+          <a href="<{$print_link}>" target="_blank"><img src="<{$images_url}>/print.gif" alt="<{$alt_print}>" title="<{$alt_print}>" border="0" /></a>
+        <{/if}>
+</form>
+
+<br /><br />
+<{/strip}>
+
+<{include file='db:system_notification_select.html'}>
