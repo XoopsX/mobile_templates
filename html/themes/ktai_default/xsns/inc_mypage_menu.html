@@ -1,0 +1,24 @@
+<{if $user_menu}>
+<{$user_menu.title}>
+<ul>
+<li><a href="<{$user_menu.url.home}>"><{$smarty.const._MD_XSNS_MYPAGE_HOME}></a></li>
+<li><a href="<{$user_menu.url.friend}>"><{$smarty.const._MD_XSNS_TITLE_MYPAGE_FRIEND}></a></li>
+ <{if $mod_config.blog_module_name}>
+  <li><a href="<{$user_menu.url.blog}>"><{$smarty.const._MD_XSNS_BLOG}></a></li>
+ <{/if}>
+<li><a href="<{$user_menu.url.news}>"><{$smarty.const._MD_XSNS_TITLE_MYPAGE_NEWS}></a></li>
+<{if $user_menu.is_own_page}>
+ <{if $mod_config.use_footprint}>
+  <li><a href="<{$user_menu.url.footprint}>"><{$smarty.const._MD_XSNS_TITLE_MYPAGE_FOOTPRINT}></a></li>
+ <{/if}>
+<li><a href="<{$user_menu.url.profile}>"><{$smarty.const._MD_XSNS_TITLE_MYPAGE_PROFILE}></a></li>
+<{else}>
+ <{if $user_menu.is_friend_page}>
+  <li><a href="<{$user_menu.url.intro}>"><{$smarty.const._MD_XSNS_TITLE_MYPAGE_INTRO}></a></li>
+ <{else}>
+  <li><a href="<{$user_menu.url.friend_add}>"><{$smarty.const._MD_XSNS_FRIEND_ADD}></a></li>
+ <{/if}>
+<{/if}>
+</ul>
+<hr>
+<{/if}>

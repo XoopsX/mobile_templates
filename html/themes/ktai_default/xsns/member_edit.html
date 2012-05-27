@@ -1,0 +1,26 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+<hr>
+
+<p><{$smarty.const._MD_XSNS_TITLE_MEMBER_EDIT}></p>
+<p><{$pager.selector}> <{$pager.description}></p>
+
+<ul>
+<{foreach item=member from=$member_list}>
+<li>
+<{$smarty.const._MD_XSNS_USER_NAME}> <a href="<{$member.page_url}>"><{$member.name}></a><br>
+<{$smarty.const._MD_XSNS_AVATAR}> <a href="<{$member.page_url}>"><img src="<{$member.avatar_url}>" width="<{$member.avatar_width}>" height="<{$member.avatar_height}>" alt=""></a><br>
+<{$smarty.const._MD_XSNS_MEMBER_REG_DATE}> <{$member.time|date_format:"%Y-%m-%d %H:%M:%S"}><br>
+<{$smarty.const._MD_XSNS_MEMBER_EDIT_MENU}> <{if $member.is_editable}><br>
+	<{$member.form_edit}>
+	<{$member.sel_edit}>
+	<input type="submit" class="submitS" value="<{$smarty.const._MD_XSNS_BTN_SEND}>"></td>
+	</form>
+<{/if}>
+</li>
+<{/foreach}>
+
+<p><{$pager.selector}> <{$pager.description}></p>
+
+</table>
+</div>

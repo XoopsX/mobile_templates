@@ -1,0 +1,22 @@
+<div id="mainFrame">
+
+<!-- User Menu -->
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<p><{$smarty.const._MD_XSNS_TITLE_MYPAGE_INTRO_DEL}></p>
+
+<ul>
+<li><{$smarty.const._MD_XSNS_AVATAR}><br>
+<a href="<{$intro.user_from.page_url}>"><img src="<{$intro.user_from.avatar_url}>"></a></li>
+<li><{$smarty.const._MD_XSNS_USER_NAME}> <a href="<{$intro.user_from.page_url}>"><{$intro.user_from.name}></a></li><li><{$smarty.const._MD_XSNS_MYPAGE_INTRO_BODY}><br>
+<{$intro.body}></li>
+</ul>
+<{$form_intro_del}>
+
+<p><{$smarty.const._MD_XSNS_MYPAGE_INTRO_DEL_DESC}></p>
+<p>
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_DEL}>">&nbsp;&nbsp;
+</p>
+
+</form>
+</div>

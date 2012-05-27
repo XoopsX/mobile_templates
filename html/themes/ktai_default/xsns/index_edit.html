@@ -1,0 +1,61 @@
+<div id="mainFrame">
+
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+<hr>
+
+<form action="index.php" method="post">
+<input type="hidden" name="p" value="index">
+<input type="hidden" name="act" value="edit_exec">
+<input type="hidden" name="cid" value="<{$commu.id}>">
+<input type="hidden" name="n" value="0">
+<{$token_tag}>
+
+<p><{$smarty.const._MD_XSNS_TITLE_INDEX_EDIT}></p>
+<{$smarty.const._MD_XSNS_COMMU_NAME}><{$smarty.const._MD_XSNS_REQUIRED_ITEM}><br>
+<input type="text" name="name" size="50" value="<{$commu.name}>"></br>
+
+<{$smarty.const._MD_XSNS_CATEGORY}><br><{$category_selector}>
+
+<{$smarty.const._MD_XSNS_INDEX_PUBLIC}><br>
+<input type="radio" name="public" value="1" <{$public.checked1}>><{$smarty.const._MD_XSNS_INDEX_PUBLIC_L1}><br>
+<input type="radio" name="public" value="2" <{$public.checked2}>><{$smarty.const._MD_XSNS_INDEX_PUBLIC_L2}><br>
+<input type="radio" name="public" value="3" <{$public.checked3}>><{$smarty.const._MD_XSNS_INDEX_PUBLIC_L3}><br>
+
+<{$smarty.const._MD_XSNS_DESC}><{$smarty.const._MD_XSNS_REQUIRED_ITEM}><br>
+<textarea id='info' name='info' cols='30' rows='10'><{$commu.info}></textarea> 
+<{$smarty.const._MD_XSNS_IMAGE}>
+<{if count($commu.image) > 0}>
+<p>
+<a href="<{$commu.image.url}>" target="_blank"><img src="<{$commu.image.url_src}>" alt=""></a>
+&nbsp;[<a href="<{$commu.image.url_del}>"><{$lang.del_image}></a>]
+</p>
+<{/if}>
+
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_EDIT}>">
+
+</form>
+<br><br>
+
+<!-- Delete Form -->
+
+<form action="index.php" method="get">
+<input type="hidden" name="p" value="index">
+<input type="hidden" name="act" value="del">
+<input type="hidden" name="cid" value="<{$commu.id}>">
+
+<{$smarty.const._MD_XSNS_TITLE_INDEX_DEL}>
+
+<{if $commu.del_enabled}>
+
+<p><{$smarty.const._MD_XSNS_INDEX_DEL_DESC2}></p>
+<p><input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_DEL}>"></p>
+
+<{else}>
+
+<p style="text-align:left;"><{$smarty.const._MD_XSNS_INDEX_DEL_DESC1}></p>
+<p style="text-align:left;"><{$smarty.const._MD_XSNS_INDEX_DEL_DESC2}></p>
+
+<{/if}>
+</form>
+
+</div>

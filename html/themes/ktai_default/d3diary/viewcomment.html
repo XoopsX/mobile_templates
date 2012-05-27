@@ -1,0 +1,26 @@
+<!-- start module contents -->
+<{if $yd_uid>0}><{$yd_uname}><{$smarty.const._MD_DIARY_PERSON}><br/><{/if}>
+<br/>
+
+<p><{$smarty.const._MD_COM_RECENT}></p>
+
+<ul>
+<{if $yd_comment.0.year>0}>
+<{section name=num loop=$yd_comment}>
+<hr>
+<li><{$yd_comment[num].year}><{$smarty.const._MD_DATE_YEAR}><{$yd_comment[num].month}><{$smarty.const._MD_DATE_MONTH}><{$yd_comment[num].day}><{$smarty.const._MD_DATE_DAY}>&nbsp;<{$yd_comment[num].time}>
+</li>
+<li>
+<a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=detail&amp;bid=<{$yd_comment[num].bid}><{$yd_com_key}><{$yd_comment[num].unique_path}>">
+<{$yd_comment[num].title}></a>
+ (<{$yd_comment[num].uname}>)
+</li>
+<{/section}>
+<{else}>
+<{$smarty.const._MD_NOCOMMENT}><br />
+<{/if}>
+</ul>
+<hr />
+<{if $yd_layout=="left" || $yd_layout=="right" }>
+	<{include file="db:`$mydirname`_rightarea.html"}>
+<{/if}>

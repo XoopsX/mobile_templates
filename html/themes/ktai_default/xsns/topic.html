@@ -1,0 +1,140 @@
+<div id="mainFrame">
+<{$breadcrumbs_list}>
+<hr>
+<{if $mydirname}>
+<{include file="db:`$mydirname`_inc_breadcrumbs.html"}>
+<{/if}>
+
+<{if $comment_list.0}>
+
+<!-- Topic Table : Start -->
+<!-- <p><a name="0"></a><{$smarty.const._MD_XSNS_TOPIC}></p> -->
+
+<p><a name="<{$comment_list.0.number}>"></a>[<{$commu.name}>] <{$smarty.const._MD_XSNS_TOPIC}></p>
+<li><{$topic.name}><br>
+(<{$comment_list.0.time|date_format:"%Y-%m-%d %H:%M:%S"}>)</li>
+<li><a href="<{$comment_list.0.author.page_url}>"><{$comment_list.0.author.name}></a></li>
+
+<{if count($comment_list.0.images)>0}>
+<!-- Images : Start -->
+<p>
+<{foreach item=image from=$comment_list.0.images}>
+<a href="<{$image.url}>" target="_blank"><img src="<{$image.url_src}>" alt=""></a>&nbsp;&nbsp;
+<{/foreach}>
+</p>
+<!-- Images : End -->
+<{/if}>
+
+<!-- Body : Start -->
+<{$comment_list.0.body}>
+<!-- Body : End -->
+
+<{if count($comment_list.0.files)>0}>
+<hr>
+<!-- Files : Start -->
+<p>
+<{foreach item=file from=$comment_list.0.files}>
+<a href="<{$file.url}>"><{$file.icon}><{$file.caption|mb_truncate:35}></a><br>
+<{/foreach}>
+</p>
+<!-- Files : End -->
+<{/if}>
+
+<{if $comment_list.0.show_edit}>
+<hr>
+<a href="<{$comment_list.0.url_edit}>"><{$smarty.const._MD_XSNS_TOPIC_EDIT}></a><{/if}>
+<!-- Topic Table : End -->
+<br>
+<{/if}>
+
+<{if $comment_count > 0}>
+<hr>
+<!-- Comment List Table : Start -->
+<a name="comment"></a><{$smarty.const._MD_XSNS_TOPIC_RESPONSE}><br>
+<{$pager.selector}> <{$pager.description}>
+
+<{foreach item=comment from=$comment_list}>
+
+<{if $comment.number > 0}>
+<li>
+<{$comment.time|date_format:"%Y-%m-%d %H:%M:%S"}><br>
+<b><{$comment.number}></b>: <a name="<{$comment.number}>" href="<{$comment.author.page_url}>"><{$comment.author.name}></a>
+<{if count($comment.images)>0}>
+<!-- Images : Start -->
+<p>
+<{foreach item=image from=$comment.images}>
+<a href="<{$image.url}>" target="_blank"><img src="<{$image.url_src}>" alt=""></a>&nbsp;&nbsp;
+<{/foreach}>
+</p>
+<!-- Images : End -->
+<{/if}>
+
+<!-- Comment Body : Start -->
+<{$comment.body}>
+<!-- Comment Body : End -->
+
+<{if count($comment.files)>0}>
+<!-- Files : Start -->
+<p>
+<{foreach item=file from=$comment.files}>
+<a href="<{$file.url}>"><{$file.icon}><{$file.caption|mb_truncate:35}></a><br>
+<{/foreach}>
+</p>
+<!-- Files : End -->
+<{/if}>
+<{if $comment.uid == 0}>
+<div style="text-align:right;"><{$smarty.const._MD_XSNS_TOPIC_COM_DELETED}></div>
+
+<{else}>
+<{if $comment.show_edit}>
+&nbsp;&nbsp;<a href="<{$comment.url_edit}>"><{$smarty.const._MD_XSNS_TOPIC_EDIT}></a>
+&nbsp;&nbsp;<a href="<{$comment.url_del}>"><{$smarty.const._MD_XSNS_TOPIC_DEL_RES}></a>
+<{/if}>
+<{/if}>
+
+<{/if}>
+</li>
+<hr>
+
+<{/foreach}>
+</ul>
+<{$pager.selector}> <{$pager.description}>
+
+<!-- Comment List Table : End -->
+
+<{/if}>
+
+<br>
+
+<{if $commu.auth_level >= 4 && $comment_count_all < 1000}>
+
+<!-- Comment Form Table : Start -->
+
+<hr>
+<{$smarty.const._MD_XSNS_TOPIC_RESPONSE}><br>
+<form action="index.php" method="post">
+<input type="hidden" name="p" value="topic">
+<input type="hidden" name="act" value="res_confirm">
+<input type="hidden" name="tid" value="<{$topic.id}>">
+<textarea id="body" name="body" cols="30" rows="8"></textarea>
+
+<a name="post"></a><{$smarty.const._MD_XSNS_TOPIC_WRITE}><br>
+
+
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_POST}>">
+
+</form>
+
+<!-- Comment Form Table : End -->
+<br>
+
+<{/if}>
+
+<br>
+
+<!-- Top Page Link -->
+<div class="centerH">
+<a href="<{$top_link.url}>"><{$top_link.title}></a>
+</div>
+
+</div>

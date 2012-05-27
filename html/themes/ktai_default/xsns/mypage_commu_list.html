@@ -1,0 +1,24 @@
+<div id="mainFrame">
+
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<p><{$smarty.const._MD_XSNS_TITLE_COMMU_LIST|sprintf:"`$user_name`"}></p>
+
+<{if $commu_list|@count > 0}>
+
+<ul>
+<{section name=id loop=$commu_list start=0 max=20}>
+<{if $commu_list[id].member_count > 0}>
+<li><a href="<{$commu_list[id].page_url}>"><br>
+<img src="<{$commu_list[id].image.url_src|default:"images/cm_commu_default1.gif"}>"><br><{$commu_list[id].name|mb_truncate:16}>
+</a><br>
+<small>(<{$commu_list[id].member_count}>)</small>
+</li>
+<{/if}>
+<{/section}>
+</ul>
+<{$pager.selector}> <{$pager.description}>
+
+<{/if}>
+
+</div>

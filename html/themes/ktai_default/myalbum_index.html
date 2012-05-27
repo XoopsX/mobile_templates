@@ -1,0 +1,35 @@
+<{strip}>
+      <br />
+      <{*include file="db:myalbum_header.html"*}>
+      <br />
+      <{include file="db:myalbum_categories.html"}>
+      <hr />
+      <form name='cid_select' action='<{$mod_url}>/viewcat.php' method='GET' style='margin:0px;text-align:center;'>
+        <select name='cid' onchange='submit();'>
+          <option value=''><{$lang_directcatsel}></option>
+          <{$category_options}>
+        </select> &nbsp; &nbsp;
+        <{$photo_global_sum}> &nbsp; &nbsp;
+        <{if $lang_add_photo}><a href="submit.php"><{$lang_add_photo}><img src="<{$mod_url}>/images/pictadd.gif" border="0" alt="<{$lang_add_photo}>" title="<{$lang_add_photo}>" /></a><{/if}>
+      </form>
+<br />
+      <h4><{$lang_latest_list}></h4>
+      <{if $photonavdisp }>
+              <{$photonavinfo}><br />
+              <{$photonav}>
+        <hr />
+      <{/if}>
+        <{foreach from=$photos item=photo}>
+          <hr>
+          <{include file="db:myalbum_photo_in_list.html"}>
+        <{/foreach}>
+      <{if $photonavdisp }>
+        <hr />
+              <{$photonavinfo}>
+              <{$photonav}>
+      <{/if}>
+<br />
+      <{include file='db:system_notification_select.html'}>
+      <br />
+      <{include file="db:myalbum_footer.html"}>
+<{/strip}>

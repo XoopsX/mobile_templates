@@ -1,0 +1,31 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+<hr>
+<p>[<{$commu.name}>] <{$smarty.const._MD_XSNS_TITLE_TOPIC_LIST}></p>
+
+<p><{$smarty.const._MD_XSNS_TOPIC_LIST_DESC}></p>
+
+<{if $topic_list|@count > 0}>
+<{$pager.selector}> <{$pager.description}>
+<ul>
+
+<{foreach item=topic from=$topic_list}>
+<li>
+<{$topic.time|date_format:"%Y-%m-%d %H:%M:%S"}><br> <a href="<{$topic.page_url}>"><b><{$topic.name|mb_truncate:30}></b></a><br>
+
+<{if $topic.show_edit}>
+<a href="<{$topic.page_url_edit}>"><{$smarty.const._MD_XSNS_TOPIC_EDIT}></a>&nbsp;&nbsp;<{/if}>
+<a href="<{$topic.page_url}>"><{$smarty.const._MD_XSNS_TOPIC_RESPONSE}>(<{$topic.comment_count}>)</a>
+</li>
+<{/foreach}>
+</ul>
+<{$pager.selector}> <{$pager.description}>
+
+<{/if}>
+
+<hr>
+<div class="centerH">
+<a href='<{$top_link.url}>'><{$top_link.title}></a>
+</div>
+
+</div>

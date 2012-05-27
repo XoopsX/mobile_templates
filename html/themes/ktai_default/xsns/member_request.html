@@ -1,0 +1,46 @@
+<div id="mainFrame">
+<{if $mydirname}>
+<{include file="db:`$mydirname`_inc_breadcrumbs.html"}>
+<{/if}>
+<hr>
+
+<table class="outer memberReq">
+
+<tr><th colspan="3"><{$lang.request_title}></td></tr>
+
+<tr class="head">
+<td colspan="3"><div class="msgFrame"><{$lang.request_desc}></div></td>
+</tr>
+
+<tr class="even">
+<td class="avatar" rowspan="2">
+<a href="<{$member.page_url}>"><img src="<{$member.avatar_url}>" width="<{$member.avatar_width}>" height="<{$member.avatar_height}>" alt=""></a>
+</td>
+<td class="itemTitle"><{$lang.name}></td>
+<td class="itemValue"><a href="<{$member.page_url}>"><{$member.name}></a></td>
+</tr>
+
+<tr class="even">
+<td class="itemTitle"><{$lang.last_login}></td>
+<td class="itemValue"><{$member.last_login}></td>
+</tr>
+
+<{$form_request_submit}>
+<tr class="foot">
+<td colspan="3" class="centerH" style="padding-top:15px; padding-bottom:15px;">
+<{if $request_type > 0}>
+<p>
+<{$lang.message}> :<br>
+<textarea name="message" cols="40" rows="5"></textarea>
+</p>
+<{/if}>
+<p>
+<input type="submit" class="submit" value="<{$lang.submit}>">&nbsp;&nbsp;
+<input type="button" class="submit" value="<{$lang.cancel}>" onclick="javascript:history.go(-1);">
+</p>
+</td>
+</tr>
+</form>
+
+</table>
+</div>

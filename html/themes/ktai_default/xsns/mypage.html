@@ -1,0 +1,128 @@
+<div id="mainFrame">
+<!-- User Menu -->
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<ul>
+<{if $info_list|@count > 0}>
+<!-- Information Box : Start -->
+<LI>INFORMATION<br>
+<{foreach item=info from=$info_list}>
+<a href="<{$info.url}>"><font style="color:#ff0000;text-decoration:underline;"><{$info.message}></font></a>
+(<{$info.time|date_format:"%Y-%m-%d %H:%M:%S"}>)<br>
+<{/foreach}>
+<br>
+<!-- Information Box : End -->
+
+<{/if}>
+
+<!-- User Information : Start -->
+<p><{$lang.allaboutuser}></p>
+<li><{$smarty.const._US_USERNAME}><{$user_info.name}></li>
+<li><{$smarty.const._US_AVATAR}><br><{$user_info.avatarurl}></li>
+<li><{$smarty.const._US_REALNAME}><br><{$user_info.realname}></li>
+<li><{$smarty.const._US_RANK}><br><{$user_info.rank}></li>
+<li><{$smarty.const._US_WEBSITE}><br><{$user_info.websiteurl}></li>
+<li><{$smarty.const._US_EMAIL}><br><{$user_info.email}></li>
+<li>PM <a href="<{$xoops_url}>/modules/message/index.php?action=new&to_userid=<{$user_info.id}>"><{$user_info.name}> さんにメッセージを書く</a></li>
+<li><{$smarty.const._US_LOCATION}><br><{$user_info.location}></li>
+<li><{$smarty.const._US_OCCUPATION}><br><{$user_info.occupation}></li>
+<li><{$smarty.const._US_INTEREST}><br><{$user_info.interest}></li>
+<li><{$smarty.const._US_SIGNATURE}><br><{$user_info.signature}></li>
+<li><{$smarty.const._US_EXTRAINFO}><br><{$user_info.extrainfo}></li>
+<li><{$smarty.const._US_MEMBERSINCE}><br><{$user_info.reg_date|date_format:"%Y-%m-%d"}></li>
+<li><{$smarty.const._US_LASTLOGIN}><br><{$user_info.last_login|date_format:"%Y-%m-%d %H:%M:%S"}></li>
+
+<!-- User Information : End -->
+<hr>
+<!-- Left Column : Start -->
+	  <{if $friend_count>0}>
+	  <!-- Friend List : Start -->
+		<p><{$smarty.const._MD_XSNS_MYPAGE_FRIEND_LIST|sprintf:"`$user_info.name`"}></p>
+		<{section name=id loop=$friend_list}>
+		<li>
+		<{if $friend_list[id]}>
+		<a href="<{$friend_list[id].page_url}>"><{$friend_list[id].name}></a>
+		<{/if}>
+		</li>
+		<{/section}>
+	  <!-- Friend List : End -->
+		<hr>
+	  <{/if}>
+	  
+	  <{if $commu_count>0}>
+	  <!-- Community List : Start -->
+	  <p><{$smarty.const._MD_XSNS_MYPAGE_COMMU_LIST|sprintf:"`$user_info.name`"}></p>
+		<{section name=id loop=$commu_list}>
+		<li>
+		<{if $commu_list[id]}>
+		<a href="<{$commu_list[id].page_url}>"><{$commu_list[id].name}></a>
+		<{/if}>
+		</li>
+
+		<{/section}>
+		
+	<a href="<{$url.commu_list_all}>"><{$lang.commu_list_all}> (<{$commu_count|default:0}>)</a></td>
+	  <hr>
+	  <!-- Community List : End -->
+	  <{/if}>
+
+	<!-- Left Column : End -->
+	
+	<!-- Right Column : Start -->
+		
+		<{if $blog_list|@count > 0}>
+		<!-- Blog List : Start -->
+		<{if $is_own_page}>
+		<{$smarty.const._MD_XSNS_MYPAGE_BLOG_LIST}>
+		<{else}>
+		<{$smarty.const._MD_XSNS_MYPAGE_FRIEND_BLOG_LIST|sprintf:"`$user_info.name`"}>
+		<{/if}>
+		
+		<{foreach item=blog from=$blog_list}>
+		<img src="<{$blog.image}>" style="vertical-align:middle;">
+		<b><a href="<{$blog.link}>"><{$blog.title}></a></b>
+		<div style="text-align:right;">
+		<small><{$blog.time}> <a href="<{$blog.link_author}>"><{$blog.author}></a></small>
+		</div>
+		<{/foreach}>
+		
+		<{if $is_own_page}>
+		<a href="<{$url.blog_list_all}>"><{$smarty.const._MD_XSNS_SHOW_ALL}> (<{$blog_count|default:0}>)</a>
+		<{else}>
+		<a href="<{$blog_list.0.link_author}>"><{$smarty.const._MD_XSNS_SHOW_ALL}> (<{$blog_count|default:0}>)</a>
+		<{/if}>
+		<br>
+		<!-- Blog List : End -->
+		<{/if}>
+
+		<{if $topic_list|@count > 0}>
+		<!-- New Topic List : Start -->
+		<p><{$smarty.const._MD_XSNS_MYPAGE_TOPIC_LIST}></p>
+		<{foreach item=topic from=$topic_list}>
+		<li><b><a href="<{$topic.url}>"><{$topic.name|mb_truncate:20}></a></b><br>
+		<small>&nbsp;&nbsp;- <{$topic.commu_name|mb_truncate:25}></small><br>
+		<div style="text-align:right;"><small><{$topic.time|date_format:"%Y-%m-%d %H:%M:%S"}></small></div>
+		</li>
+		<{/foreach}>
+		<a href="<{$url.topic_list_all}>"><{$smarty.const._MD_XSNS_SHOW_ALL}> (<{$topic_count|default:0}>)</a>
+		<hr>
+		<!-- New Topic List : End -->
+		<{/if}>
+		
+		<{if $intro_list|@count > 0}>
+		<!-- Intro List : Start -->
+		<p><{$smarty.const._MD_XSNS_MYPAGE_INTRO_LIST}></p>
+		<{foreach item=intro from=$intro_list}>
+		<li>
+		<{$intro.body}>
+		<div style="text-align:right"><a href="<{$intro.user_from.page_url}>"><{$intro.user_from.name}></a></div>
+		</li>
+		<{/foreach}>
+		<a href="<{$url.intro_list_all}>"><{$smarty.const._MD_XSNS_SHOW_ALL}> (<{$intro_count}>)</a>
+		<hr>
+		<!-- Intro List : End -->
+		<{/if}>
+		
+	<!-- Right Column : End -->
+
+</ul>

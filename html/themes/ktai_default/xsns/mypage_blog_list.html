@@ -1,0 +1,24 @@
+<div id="mainFrame">
+
+<!-- User Menu -->
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<p><{$smarty.const._MD_XSNS_MYPAGE_BLOG_LIST_ALL}></p>
+
+<{if $blog_list|@count > 0}>
+
+<{$pager.selector}> <{$pager.description}>
+<ul>
+<{foreach item=blog from=$blog_list}>
+<li>
+<{$smarty.const._MD_XSNS_MYPAGE_BLOG_TITLE}> <a href="<{$blog.link}>"><{$blog.title|mb_truncate:20}></a><br>
+<{$smarty.const._MD_XSNS_MYPAGE_BLOG_AUTHOR}> <a href="<{$blog.link_author}>"><{$blog.author}></a><br>
+<{$smarty.const._MD_XSNS_POST_DATE}> <{$blog.time}><br>
+</li>
+<{/foreach}>
+</ul>
+<{$pager.selector}> <{$pager.description}>
+
+<{/if}>
+
+</div>

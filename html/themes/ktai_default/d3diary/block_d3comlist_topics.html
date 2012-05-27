@@ -1,0 +1,61 @@
+<{if $block.full_view == true}>
+<{foreach item=topic from=$block.topics}>
+<{strip}>
+<{if $topic.can_display}>
+	<p>
+    <{if $topic.forum_id == $block.com_forum_id}>
+        <a href="<{$xoops_url}>/modules/<{$block.mydirname}>/index.php?page=detail&amp;bid=<{$topic.link_id}><{$block.unique_key}><{$topic.unique_path}>">
+    <{else}>
+        <a href="<{$block.mod_url}>/index.php?topic_id=<{$topic.id}>#post_id<{$topic.last_post_id}>">
+    <{/if}>
+	<{if $topic.u2t_marked}><img src="<{$block.mod_imageurl}>/block_marked.gif" alt="<{$block.lang_alt_marked}>" /><{/if}>
+	<{* displays the last post's subject or topic title *}>
+	<{if $block.disp_last_subject }>
+	<{$topic.last_subject}>
+	<{else}>
+	<{$topic.title}>
+	<{/if}></a>
+	<{if $block.use_aggre}>
+	 	[<a href="<{$block.mod_url}>/index.php?forum_id=<{$topic.forum_id}>"><{$topic.forum_title}>]</a>  
+	 <{/if}> </p>
+	<{if ! $topic.solved}><img src="<{$block.mod_imageurl}>/block_unsolved.gif" alt="<{$block.lang_alt_unsolved}>" /><{/if}></p>
+	<p><{$block.lang_replies}> <{$topic.replies}> | <{$block.lang_views}> <{$topic.views}></p>
+	<p><{$block.lang_lastpost}> 
+	<{if $block.mod_config.use_name==1 && $topic.last_name}><{$topic.last_name}>
+	<{elseif $topic.last_uname}><{$topic.last_uname}>
+	<{else}><{$topic.guest_name}>
+	<{/if}></p>
+	<p><{$topic.last_post_time_formatted}></p>
+	<hr />
+<{/if}>
+<{/strip}>
+<{/foreach}>
+
+<div style="text-align:right; padding: 5px;">
+<a href="<{$block.mod_url}>/index.php?page=search"><{$block.lang_linktosearch}></a>
+&nbsp;
+<{if $block.use_aggre}>
+<a href="<{$block.mod_url}>/index.php?cat_ids=0"><{$block.lang_linktolisttopics}></a>
+&nbsp;
+<a href="<{$block.mod_url}>/index.php"><{$block.lang_linktolistcategories}></a>
+&nbsp;
+
+<{else}>
+<a href="<{$block.mod_url}>/index.php?forum_id=<{$block.com_forum_id}>"><{$block.lang_linktolisttopics}></a>
+&nbsp;
+<{/if}>
+</div>
+
+
+<{else}>
+
+<ol style="padding:3px;margin:0;">
+<{foreach item=topic from=$block.topics}>
+  <{if $topic.can_display}>
+	<li><a href="<{$xoops_url}>/modules/<{$block.mydirname}>/index.php?page=detail&amp;bid=<{$topic.link_id}><{$block.unique_key}><{$topic.unique_path}>"><{$topic.title}></a></li>
+  <{/if}>
+<{/foreach}>
+</ol>
+
+<{/if}>
+

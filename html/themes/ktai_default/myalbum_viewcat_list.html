@@ -1,0 +1,50 @@
+<{strip}>
+      <{*include file="db:myalbum_header.html"*}>
+            <span style="font-weight:bold;"><a href='index.php'><{$lang_album_main}></a>&nbsp;:&nbsp;<{$album_sub_title}></span>&nbsp;<{$lang_total}><{$photo_total_sum}><br />
+            <{if $lang_add_photo}><a href="submit.php?cid=<{$category_id}>"><{$lang_add_photo}><img src="<{$mod_url}>/images/pictadd.gif" border="0" alt="<{$lang_add_photo}>" title="<{$lang_add_photo}>" /></a><{/if}>
+      <{if count( $subcategories ) > 0 }>
+        <hr />
+        <{include file="db:myalbum_categories.html"}>
+      <{/if}>
+<br />
+<{if $photo_small_sum < 1 }>
+  <div align="center">
+    <{$lang_nomatch}>
+  </div>
+<{else}>
+        <{if $photo_small_sum > 1 }>
+          <div align="center">
+            <{$lang_sortby}>&nbsp;&nbsp;
+            <{$lang_title}> (<a href="viewcat.php?cid=<{$category_id}>&amp;uid=<{$uid}>&amp;orderby=titleA"><img src="images/up.gif" border="0" align="middle" alt="" /></a><a href="viewcat.php?cid=<{$category_id}>&amp;uid=<{$uid}>&amp;orderby=titleD"><img src="images/down.gif" border="0" align="middle" alt="" /></a>)&nbsp;
+            <{$lang_date}> (<a href="viewcat.php?cid=<{$category_id}>&amp;uid=<{$uid}>&amp;orderby=dateA"><img src="images/up.gif" border="0" align="middle" alt="" /></a><a href="viewcat.php?cid=<{$category_id}>&amp;uid=<{$uid}>&amp;orderby=dateD"><img src="images/down.gif" border="0" align="middle" alt="" /></a>)&nbsp;
+            <{if $canrateview }>
+              <{$lang_rating}> (<a href="viewcat.php?cid=<{$category_id}>&amp;uid=<{$uid}>&amp;orderby=ratingA"><img src="images/up.gif" border="0" align="middle" alt="" /></a><a href="viewcat.php?cid=<{$category_id}>&amp;uid=<{$uid}>&amp;orderby=ratingD"><img src="images/down.gif" border="0" align="middle" alt="" /></a>)&nbsp;
+            <{/if}>
+            <{$lang_popularity}> (<a href="viewcat.php?cid=<{$category_id}>&amp;uid=<{$uid}>&amp;orderby=hitsA"><img src="images/up.gif" border="0" align="middle" alt="" /></a><a href="viewcat.php?cid=<{$category_id}>&amp;uid=<{$uid}>&amp;orderby=hitsD"><img src="images/down.gif" border="0" align="middle" alt="" /></a>)
+            <br />
+            <b><{$lang_cursortedby}></b>
+            <br />
+            <br />
+                  <{$photonavinfo}>
+                  <{$photonav}>
+          </div>
+        <{/if}>
+        <br />
+          <{foreach from=$photos item=photo}>
+          <hr />
+            <{include file="db:myalbum_photo_in_list.html"}>
+          <{/foreach}>
+
+        <{if $photo_small_sum > 1 }>
+          <hr />
+          <div align="center">
+                  <{$photonavinfo}>
+                  <{$photonav}>
+          </div>
+        <{/if}>
+<{/if}>
+<br />
+      <{include file='db:system_notification_select.html'}>
+      <br />
+      <{include file="db:myalbum_footer.html"}>
+<{/strip}>

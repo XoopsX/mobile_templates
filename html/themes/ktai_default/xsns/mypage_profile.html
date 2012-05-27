@@ -1,0 +1,67 @@
+<div id="mainFrame">
+
+<!-- User Menu -->
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<form action="index.php" method="post">
+
+<ul>
+<{foreach item=hidden from=$elements.hiddens}>
+  <{$hidden.html}>
+<{/foreach}>
+
+<li><{$smarty.const._US_NICKNAME}><br><{$xoops_uname}></li>
+
+<li><{$smarty.const._US_AVATAR}><br><{$elements.avatar.html}><li>
+
+<li><{$smarty.const._US_REALNAME}><br>
+  <input type="text" name="<{$elements.realname.name}>" size="30" maxlength="60" value="<{$elements.realname.value}>"></li>
+
+<li><{$smarty.const._US_EMAIL}><br>
+  <{$elements.email.html}></li>
+
+<li><{$smarty.const._US_WEBSITE}><bt><input type="text" name="<{$elements.url.name}>" size="60" maxlength="100" value="<{$elements.url.value}>"></li>
+
+<li><{$smarty.const._US_TIMEZONE}></br><{$elements.timezone.html}></li>
+
+<li><{$smarty.const._US_LOCATION}><br>
+<input type="text" name="<{$elements.location.name}>" size="30" maxlength="100" value="<{$elements.location.value}>"></li>
+
+<li><{$smarty.const._US_OCCUPATION}><br>
+  <input type="text" name="<{$elements.occupation.name}>" size="30" maxlength="100" value="<{$elements.occupation.value}>"></li>
+
+<li><{$smarty.const._US_INTEREST}><br>
+<input type="text" name="<{$elements.interest.name}>" size="30" maxlength="150" value="<{$elements.interest.value}>"></li>
+
+<li><{$smarty.const._US_SIGNATURE}><br>
+<textarea id='user_sig' name='user_sig' onselect="xoopsSavePosition('user_sig');" onclick="xoopsSavePosition('user_sig');" onkeyup="xoopsSavePosition('user_sig');" cols='50' rows='5'><{$elements.sig.value}></textarea></li>
+
+<li><{$smarty.const._US_EXTRAINFO}><br>
+  <textarea name="<{$elements.extra.name}>" rows="5" cols="50"><{$elements.extra.value}></textarea></li>
+
+<li><{$smarty.const._US_CDISPLAYMODE}><br><{$elements.umode.html}></li>
+
+<li><{$smarty.const._US_CSORTORDER}><br><{$elements.uorder.html}></li>
+
+<li>  <{$smarty.const._NOT_NOTIFYMETHOD}><br><{$elements.notify_method.html}></li>
+
+<li><{$smarty.const._NOT_NOTIFYMODE}><br><{$elements.notify_mode.html}></li>
+
+<li><{$smarty.const._US_PASSWORD}><br><{$elements.password.html}></li>
+
+<li><{$smarty.const._US_USECOOKIE}><br><{$elements.usercookie.html}></li>
+
+<li><{$smarty.const._US_MAILOK}><br><{$elements.mailok.html}></li>
+
+<input type="submit" value="<{$smarty.const._US_SAVECHANGES}>"><br>
+
+</form>
+</ul>
+
+<{if $user_delete_url}>
+<div style="text-align:right;">
+<a href="<{$user_delete_url}>"><{$smarty.const._US_DELACCOUNT}></a>
+</div>
+<{/if}>
+
+</div>

@@ -1,0 +1,92 @@
+<!-- start module contents -->
+<{if $mod_config.show_breadcrumbs}>
+<div id="d3d_breadcrumbs">
+	<a href="<{$xoops_url}>/">TOP</a>
+	<{foreach from=$xoops_breadcrumbs key="i" item="item"}>
+	    <{* if $i!=0 *}>
+		&nbsp;>&nbsp;
+		<{if $item.url}>
+			<a href="<{$item.url}>"><{$item.name}></a>
+		<{else}>
+			<{$item.name}>
+		<{/if}>
+	    <{* /if *}>
+	<{/foreach}>
+</div><br/>
+<{/if}>
+
+<{$smarty.const._MD_CAT_CONF}><br/>
+
+<form name="fm1" method='POST' action='index.php?page=editcat_config'>
+
+<{$yd_cfg.cname}><img src="images/open<{$yd_cfg.openarea}>.gif" border=0 /><br />
+
+<p><{if $common_cat !=1}></p>
+<strong><{$smarty.const._MD_CONF_BSELECT}></strong>
+<select name="blogtype">
+<{include file="db:`$mydirname`_inc_blog_options.html"}>
+</select>
+<{/if}>
+
+<{if $yd_use_open_cat}>
+<select name="openarea" id="openarea" onchange="chgopenarea()">
+<option value="0"><{$smarty.const._MD_CONF2_OPEN}></option>
+<option <{if $yd_cfg.openarea==1}>selected<{/if}> value="1"><{$smarty.const._MD_CONF2_1OLOSE}></option>
+<{if $yd_use_friend>=1 && $yd_openarea<=1}><option <{if $yd_cfg.openarea==3}>selected<{/if}> value="3"><{$smarty.const._MD_CONF2_3FRIEND2}></option><{/if}>
+<{if $yd_use_friend>=1 && ($yd_openarea<=1 || $yd_openarea==3)}><option <{if $yd_cfg.openarea==2}>selected<{/if}> value="2"><{$smarty.const._MD_CONF2_2FRIEND}></option><{/if}>
+<{if $allow_gpermission}><option <{if $yd_cfg.openarea==10}>selected<{/if}> value="10"><{$smarty.const._MD_CONF2_10GROUP}></option><{/if}>
+<{if $allow_ppermission}><option <{if $yd_cfg.openarea==20}>selected<{/if}> value="20"><{$smarty.const._MD_CONF2_20PERSON}></option><{/if}>
+<{if $yd_openarea<=3}><option <{if $yd_cfg.openarea==100}>selected<{/if}> value="100"><{$smarty.const._MD_CONF2_100HIDE}></option><{/if}>
+</select>
+<{/if}>
+<br />
+<{if $common_cat !=1}><{$smarty.const._MD_CONF_BSELECTDESC}><br /><br /><{/if}>
+<hr />
+<{if $allow_gpermission || $allow_ppermission}><br />
+<{$smarty.const._MD_PERMED_VGROUP}><br />
+<select name="vgids[]" id="groups" size="4" multiple>
+<{strip}><{foreach from=$yd_cfg.group_list key=groupid item=group}>
+<option value="<{$groupid}>"<{if $group.gsel==1}> selected="selected"<{/if}>><{$group.gname}></option>
+<{/foreach}><{/strip}></select>
+<{/if}>
+
+<{if $allow_ppermission}>
+<{strip}>
+    <{$smarty.const._MD_DIARY_REG_PERSON}><br />
+    <div><{if $yd_cfg.pperm_names}>
+    <{foreach from=$yd_cfg.pperm_names item="pname"}><span class="exist"><{$pname}></span><{/foreach}>
+    <{/if}></div>
+    <input type="text" name="vpids" id="d3d_tag_hidden1" value="<{$yd_cfg.pperm_list}>" /><br>
+<{/strip}>
+<{/if}>
+
+<hr />
+<{if $allow_html}>
+<b><{$smarty.const._MD_CATEGORY_HTML}></b>
+        <input type="checkbox" name="dohtml" id="dohtml" value="1" <{if $yd_cfg.dohtml==1}>checked<{/if}> />
+        <{$smarty.const._MD_CATEGORY_HTMLDSC}><br />
+<{else}>
+        <input type="hidden" name="dohtml" id="dohtml" value="0" />
+<{/if}>
+<hr />
+<{if $common_cat !=1}>
+<strong><{$smarty.const._MD_CONF_BURL}></strong>
+<input type="text" name="blogurl" size="45" value="<{$yd_cfg.blogurl}>" />
+<br />
+<{$smarty.const._MD_CONF_BURLDESC}>
+<br />
+<{$smarty.const._MD_EXAMPLE}>http://blogsample.com/<br /><br />
+
+<strong><{$smarty.const._MD_CONF_RSSURL}></strong>
+<input type="text" name="rss" size="45" value="<{$yd_cfg.rss}>" />
+<br />
+<{$smarty.const._MD_CONF_RSSURLDESC}>
+<br />
+<{$smarty.const._MD_EXAMPLE}>http://blogsample.com/index.rdf<br /><br />
+<{/if}>
+
+<input type=hidden name="cid" value="<{$yd_cfg.cid}>"/>
+<input type="hidden" name="common_cat" value="<{$common_cat}>" />
+<input type=submit name="submit1" value="<{$smarty.const._MD_SUBMIT}>"/>
+</form>
+

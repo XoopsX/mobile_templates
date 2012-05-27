@@ -1,0 +1,40 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+<hr>
+
+<form action="index.php" method="post">
+<input type="hidden" name="p" value="index">
+<input type="hidden" name="act" value="add_confirm">
+
+<p><{$smarty.const._MD_XSNS_TITLE_INDEX_ADD}></p>
+<p><{$smarty.const._MD_XSNS_REQUIRED_ITEM_DESC}></p>
+
+<{if $errors|@count > 0}>
+<ul>
+<{foreach item=error_message from=$errors}>
+<li><span class="red"><{$error_message}></span></li>
+<{/foreach}>
+</ul>
+<{/if}>
+
+<ul>
+<li><{$smarty.const._MD_XSNS_COMMU_NAME}><{$smarty.const._MD_XSNS_REQUIRED_ITEM}><br>
+<input type="text" name="name" size="50" value="<{$default.name}>"></li>
+
+<li><{$smarty.const._MD_XSNS_CATEGORY}><{$smarty.const._MD_XSNS_REQUIRED_ITEM}><br>
+<{$category_selector}></li>
+<li><{$smarty.const._MD_XSNS_DESC}><{$smarty.const._MD_XSNS_REQUIRED_ITEM}><br>
+<textarea id='info' name='info' cols='30' rows='10'></textarea></li>
+
+<li><{$smarty.const._MD_XSNS_INDEX_PUBLIC}><br>
+<input type="radio" name="public" value="1"<{$default.public1}>><{$smarty.const._MD_XSNS_INDEX_PUBLIC_L1}><br>
+<input type="radio" name="public" value="2"<{$default.public2}>><{$smarty.const._MD_XSNS_INDEX_PUBLIC_L2}><br>
+<input type="radio" name="public" value="3"<{$default.public3}>><{$smarty.const._MD_XSNS_INDEX_PUBLIC_L3}><br>
+
+<li><{$smarty.const._MD_XSNS_DESC}><{$smarty.const._MD_XSNS_REQUIRED_ITEM}><br>
+</li>
+
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_ADD}>">
+</form>
+
+</div

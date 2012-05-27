@@ -1,0 +1,35 @@
+<{strip}>
+      <br />
+      <{*include file="db:myalbum_header.html"*}>
+      <br />
+      <div align="center">
+
+        <{* Start Category Loop *}>
+        <{foreach item=ranking from=$rankings}>
+	 <br />
+          <{* Start photo loop *}>
+          <{foreach item=photo from=$ranking.photo}>
+        
+            <{$lang_rank}> : <{$photo.rank}><br />
+            <{$lang_title}> : <a href='photo.php?cid=<{$photo.cid}>&amp;lid=<{$photo.lid}>'><{$photo.title}></a><br />
+            <{$lang_category}> : <{$photo.category}><br />
+            <{if $canrateview }>
+              <{$lang_hits}> : <{$photo.hits}><br />
+              <{$lang_rating}> : <{$photo.rating}><br />
+              <{$lang_vote}><{$photo.votes}><br />
+            <{else}>
+              <{$lang_hits}> : <{$photo.hits}><br />
+            <{/if}>
+          </tr>
+        
+          <{/foreach}>
+          <{* End photo loop *}>
+        
+        <br />
+        <{/foreach}>
+        <{* End Category Loop *}>
+        
+      </div>
+<br />
+      <{include file="db:myalbum_footer.html"}>
+<{/strip}>

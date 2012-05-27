@@ -1,0 +1,54 @@
+<div id="mainFrame">
+
+<!-- User Menu -->
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<{foreach key=mode item=confirm_list_data from=$confirm_list_all}>
+
+<{if $confirm_list_data.request_count>0}>
+
+<a name="#mode<{$mode}>"></a><{$confirm_list_data.lang_title}>
+
+<{$confirm_list_data.lang_desc}>
+<ul>
+<{foreach item=confirm_data from=$confirm_list_data.confirm_list}>
+<li>
+<{$smarty.const._MD_XSNS_USER_NAME}> <td colspan="3" class="itemValue"><a href="<{$confirm_data.member.page_url}>"><{$confirm_data.member.name}></a><a href="<{$confirm_data.member.page_url}>"><img src="<{$confirm_data.member.avatar_url}>" width="<{$confirm_data.member.avatar_width}>" height="<{$confirm_data.member.avatar_height}>" alt="<{$confirm_data.member.name}>"></a>
+</li>
+
+<{if $confirm_data.show_commu}>
+<li><{$smarty.const._MD_XSNS_CONFIRM_TARGET_COMMU}><br><a href="<{$confirm_data.commu.url}>"><{$confirm_data.commu.name}></a></li>
+<{/if}>
+<{if $confirm_data.show_message}>
+<li><{$smarty.const._MD_XSNS_MESSAGE}> <{$confirm_data.message}></a></li>
+<{/if}>
+
+<li><{$smarty.const._MD_XSNS_CONFIRM_POST_DATETIME}><br>
+<{$confirm_data.time|date_format:"%Y-%m-%d %H:%M:%S"}></li>
+
+<{if !$confirm_data.accept_only}>
+
+	<{$confirm_data.form_accept}>
+	<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_CONFIRM_ACCEPT}>">
+	</form><br>
+
+	<{$confirm_data.form_reject}>
+	<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_CONFIRM_REJECT}>">
+	</form><br>
+
+<{else}>
+
+	<{$confirm_data.form_accept}>
+	<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_CONFIRM_ACCEPT}>">
+	</form><br>
+
+<{/if}>
+
+<{/foreach}>
+</ul>
+<br>
+<{/if}>
+
+<{/foreach}>
+
+</div>

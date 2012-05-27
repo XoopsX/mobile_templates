@@ -1,0 +1,120 @@
+<!-- start module contents -->
+<{if $mod_config.show_breadcrumbs}>
+<div id="d3d_breadcrumbs">
+	<a href="<{$xoops_url}>/">TOP</a>
+	<{foreach from=$xoops_breadcrumbs key="i" item="item"}>
+	    <{* if $i!=0 *}>
+		&nbsp;>&nbsp;
+		<{if $item.url}>
+			<a href="<{$item.url}>"><{$item.name}></a>
+		<{else}>
+			<{$item.name}>
+		<{/if}>
+	    <{* /if *}>
+	<{/foreach}>
+</div>
+<{/if}>
+
+	<p><a href="<{$xoops_url}>/userinfo.php?uid=<{$yd_uid}>">
+	<{if $mod_config.use_name==1 && $yd_name}><{$yd_name}>
+	<{else}><{$yd_uname}>
+	<{/if}></a><{$smarty.const._MD_DIARY_PERSON}></p>
+
+<ul>
+<li><{$yd_data.title}> <img src="images/open<{$yd_openarea}>.gif" border=0 /></li>
+
+<{if $yd_before.bid >0}>
+<li><a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=detail&amp;bid=<{$yd_before.bid}>&amp;req_uid=<{$yd_uid}><{$base_qstr}>"><{$smarty.const._MD_DIARY_LAST}></a></li>
+<{/if}>
+<{if $yd_after.bid >0}>
+<li><a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=detail&amp;bid=<{$yd_after.bid}>&amp;req_uid=<{$yd_uid}><{$base_qstr}>">
+<{$smarty.const._MD_DIARY_NEXT}></a></li>
+<{/if}>
+
+<li><{$smarty.const._MD_DIARY_DATE}>&nbsp;<{$yd_data.year}><{$smarty.const._MD_DATE_YEAR}><{$yd_data.month}><{$smarty.const._MD_DATE_MONTH}><{$yd_data.day}><{$smarty.const._MD_DATE_DAY}><{$yd_data.time}>
+</li>
+
+<li><{$smarty.const._MD_CATEGORY}>&nbsp;
+<a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?req_uid=<{$yd_uid}>&amp;mode=category&amp;cid=<{$yd_data.cid}>">
+<{$yd_data.cname}></a>
+</li>
+
+<{if $mod_config.use_tag>0}>
+<li><{$smarty.const._MD_TAG}>&nbsp;
+<{foreach from=$bTagArr item=tags}>
+	<a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?req_uid=<{$yd_uid}>&amp;tag_name=<{$tags.tag_urlenc}>" style="font-size:<{$tags.size}>%"><{$tags.tag}></a> 
+<{/foreach}>
+<{/if}>
+</li>
+
+<br />
+<{$yd_data.diary}>
+<{if $yd_photo.0.pid|count_characters>0}> <br />
+
+<{section name=num loop=$yd_photo}>
+ <{if $yd_photo[num].body_in != true}>
+  <a href="<{$xoops_url}>/modules/<{$mydirname}>/upimg/<{$yd_photo[num].pname}>" target="_blank">
+  <img src="<{$xoops_url}>/modules/<{$mydirname}>/upimg/<{$yd_photo[num].thumbnail}>" style="border:1px solid gray;" /></a>
+  <br />
+  <{* <p><{$smarty.const._MD_PHOTO}><{$num+1}></p> *}>
+  <{if $mod_config.photo_useinfo==1 && $yd_photo[num].info}><p><{$yd_photo[num].info}></p><{/if}>
+  <hr width="95%" />
+ <{/if}>
+<{/section}>
+<br/>
+<{/if}>
+</ul>
+<{if $yd_editperm==1}>
+<a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=edit&amp;bid=<{$yd_data.bid}><{if $yd_owner!=1}>&amp;req_uid=<{$yd_uid}><{/if}>">
+
+<{$smarty.const._MD_T_EDIT}></a>&nbsp;|&nbsp;
+<{/if}>
+<{$smarty.const._MD_T_VIEW}>(<{$yd_data.view}>)
+<br/>
+<hr>
+<{if $mod_config.comment_dirname}>
+	<a name="comment"></a>
+    <{d3comment mydirname=$mydirname id=$yd_data.bid subject=$yd_data.title class="d3diaryD3commentContent"}>
+<{else}>
+	<a name="viewcomment"></a>
+  <{if $yd_use_simplecomment == 0}>
+	<{$commentsnav}>
+	<center><{$lang_notice}></center>
+	<{if $comment_mode == "flat"}>
+	  <{include file="db:system_comments_flat.html"}>
+	<{elseif $comment_mode == "thread"}>
+	  <{include file="db:system_comments_thread.html"}>
+	<{elseif $comment_mode == "nest"}>
+	  <{include file="db:system_comments_nest.html"}>
+	<{/if}>
+
+  <{else}>
+	<!-- start comment area -->
+	<{if $comments.0.id >0}>
+	<p><{$lang_notice}></p>
+	<!-- start comments loop -->
+	<{include file="db:system_comments_flat.html"}>
+	<!-- end comments loop -->
+	<br />
+	<{/if}>
+	<!-- start comment form -->
+	<{$smarty.const._MD_COM_WRITE}>
+	<{if $xoops_isuser==1}>
+	<{$yr_comment_form}>
+	<{else}>
+	<{$smarty.const._MD_COM_HOWTOWRITE1}><a href="<{$xoops_url}>/user.php"><{$smarty.const._MD_COM_HOWTOWRITE2}></a><{$smarty.const._MD_COM_HOWTOWRITE3}><br />
+	<{/if}>
+	<!-- end comment form -->
+	<!-- end comment area -->
+  <{/if}>
+<{/if}>
+
+<hr>
+<br />
+<{include file='db:system_notification_select.html'}>
+<br />
+<hr />
+<{if $yd_layout=="left" || $yd_layout=="right" }>
+	<{include file="db:`$mydirname`_rightarea.html"}>
+<{/if}>
+

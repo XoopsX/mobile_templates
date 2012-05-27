@@ -1,0 +1,47 @@
+<!-- start module contents -->
+<{if $mod_config.show_breadcrumbs}>
+<div id="d3d_breadcrumbs">
+	<a href="<{$xoops_url}>/">TOP</a>
+	<{foreach from=$xoops_breadcrumbs key="i" item="item"}>
+	    <{* if $i!=0 *}>
+		&nbsp;>&nbsp;
+		<{if $item.url}>
+			<a href="<{$item.url}>"><{$item.name}></a>
+		<{else}>
+			<{$item.name}>
+		<{/if}>
+	    <{* /if *}>
+	<{/foreach}>
+</div>
+<{/if}>
+	<p><a href="<{$xoops_url}>/userinfo.php?uid=<{$yd_uid}>">
+	<{if $mod_config.use_name==1 && $yd_name}><{$yd_name}>
+	<{else}><{$yd_uname}>
+	<{/if}></a><{$smarty.const._MD_DIARY_PERSON}></p>
+<br/>
+
+<{$smarty.const._MD_LIST_OTHER}><img src="images/open<{$yd_openarea}>.gif" border=0 />
+<hr />
+<{$smarty.const._MD_OTHER_DESC}><br />
+<{if $yd_data[0].year>0}>
+<ul>
+<{section name=num loop=$yd_data}>
+<li>
+<img src="images/pencil.gif" border=0 />
+<{$yd_data[num].year}><{$smarty.const._MD_DATE_YEAR}><{$yd_data[num].month}><{$smarty.const._MD_DATE_MONTH}><{$yd_data[num].day}><{$smarty.const._MD_DATE_DAY}>&nbsp;
+<a href="<{$yd_data[num].link}>" target="_blank"><{$yd_data[num].title}></a>
+</li>
+<{/section}>
+</ul>
+<{else}>
+<{$smarty.const._MD_NOENTRY}>
+<{/if}>
+
+<{if $yd_owner==1}>
+<br />
+<a href="<{$xoops_url}>/modules/<{$mydirname}>/usr_config.php">
+<img src="<{$xoops_url}>/modules/<{$mydirname}>/images/arrow1.png" border=0 />
+<{$smarty.const._MD_CONF_LINK}>
+</a>
+<{/if}>
+

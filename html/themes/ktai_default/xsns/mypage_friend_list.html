@@ -1,0 +1,23 @@
+<div id="mainFrame">
+
+<!-- User Menu -->
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<{if $friend_list|@count > 0}>
+<hr>
+<p><{$smarty.const._MD_XSNS_FRIEND_TITLE|sprintf:"`$user_name`"}></p>
+<p><{$pager.selector}> <{$pager.description}></p>
+<hr>
+<ul>
+<{section name=id loop=$friend_list}>
+	<li><{$smarty.const._MD_XSNS_USER_NAME}> <a href="<{$friend_list[id].page_url}>"><{$friend_list[id].name}></a></li>
+	<li><{$smarty.const._MD_XSNS_MEMBER_LAST_LOGIN}><br> <{$friend_list[id].last_login|date_format:"%Y-%m-%d %H:%M:%S"}><li>
+	<li><{if $is_own_page}><{$smarty.const._MD_XSNS_FRIEND_EDIT}> <{$friend_list[id].edit_menu}><{/if}></li>
+<hr>
+<{/section}>
+</ul>
+<p><{$pager.selector}> <{$pager.description}></p>
+
+<{/if}>
+
+</div>

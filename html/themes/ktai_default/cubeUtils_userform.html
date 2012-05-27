@@ -1,0 +1,26 @@
+<h2><{$smarty.const._LOGIN}></h2>
+
+<form action="<{$xoops_url}>/user.php" method="post" style="margin-top: 0px;">
+  <ul>
+  <li>
+    <{$smarty.const._USERNAME}><br />
+    <{xoops_input type=text name=uname size=12 value=$block.unamevalue maxlength=25 id="`$smarty.const.XOOPS_INPUT_DEFID_PREFIX`block_uname"}><br />
+  </li>
+
+  <li>
+    <{$smarty.const._PASSWORD}><br />
+    <{xoops_input type=password name=pass size=12 maxlength=32 id="`$smarty.const.XOOPS_INPUT_DEFID_PREFIX`block_pass"}><br />
+  </li>
+  </ul>
+
+  <input type="hidden" name="xoops_redirect" value="<{$xoops_requesturi}>" />
+  <{xoops_input type=hidden name=op value=login id="`$smarty.const.XOOPS_INPUT_DEFID_PREFIX`block_op"}>
+  <input type="submit" value="<{$smarty.const._LOGIN}>" />
+</form>
+
+<{if $allowRegister}>
+<p style="text-align:center;"><a href="<{$xoops_url}>/register.php"><{$smarty.const._MD_USER_LANG_NOTREGISTERED}></a></p>
+<{/if}>
+
+<hr />
+

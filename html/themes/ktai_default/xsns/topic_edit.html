@@ -1,0 +1,75 @@
+<div id="mainFrame">
+<{if $mydirname}>
+<{include file="db:`$mydirname`_inc_breadcrumbs.html"}>
+<{/if}>
+<hr>
+
+<form action="index.php" method="post">
+<input type="hidden" name="p" value="topic">
+<input type="hidden" name="act" value="edit_exec">
+<input type="hidden" name="tcid" value="<{$topic.tcid}>">
+<{$token_tag}>
+
+<p><{$lang.edit_topic}></p>
+
+<{$smarty.const._MD_XSNS_TOPIC_TITLE}><{$smarty.const._MD_XSNS_REQUIRED_ITEM}><br>
+<{if $comment.number == 0}>
+<input type="text" name="name" value="<{$topic.name}>" size="50">
+<{else}>
+<{$topic.name}>
+<{/if}><br>
+
+<{if $comment.number > 0}>
+<{$smarty.const._MD_XSNS_TOPIC_RESPONSE_ID}> <{$comment.number}><br>
+<{/if}>
+
+<{$smarty.const._MD_XSNS_TOPIC_BODY}><{$smarty.const._MD_XSNS_REQUIRED_ITEM}> 
+<textarea name="body" cols="40" rows="6"><{$comment.body}></textarea></li>
+
+<br>
+
+<!-- Images : Start -->
+<{$lang.image}>
+<{if count($comment.images) > 0}>
+<p>
+<{foreach item=image from=$comment.images}>
+<a href="<{$image.url}>" target="_blank"><img src="<{$image.url_src}>" alt=""></a>
+[<a href="<{$image.url_del}>"><{$lang.del}></a>]&nbsp;&nbsp;
+<{/foreach}>
+</p>
+<{/if}>
+
+<!-- Images : End -->
+
+<!-- Files : Start -->
+<{$lang.file}><br>
+
+<{if count($comment.files) > 0}>
+<p>
+<ul>
+<{foreach item=file from=$comment.files}>
+<li><a href="<{$file.url}>"><{$file.caption|mb_truncate:50:"...":1:1}></a>
+&nbsp;&nbsp;[<a href="<{$file.url_del}>"><{$lang.del}></a>]</li>
+<{/foreach}>
+</ul>
+</p>
+<{/if}>
+
+<!-- Files : End -->
+
+
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_EDIT}>">
+</form>
+
+<br>
+
+<{if $comment.number==0}>
+<!-- Delete Form : Start -->
+<{$form_topic_del}>
+<{$smarty.const._MD_XSNS_TOPIC_DEL_DESC}><br>
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_DEL}>">
+</form>
+<!-- Delete Form : Start -->
+<{/if}>
+
+</div>

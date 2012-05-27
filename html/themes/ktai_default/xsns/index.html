@@ -1,0 +1,67 @@
+<div id="mainFrame">
+
+<ul>
+<!-- Community Search -->
+<{$smarty.const._MD_XSNS_INDEX_SEARCH}><br>
+ <{$form_search}>
+<li>
+<{$smarty.const._MD_XSNS_INDEX_KEYWORD}><br>
+<input type="text" name="keyword" value="<{$keyword}>">&nbsp;
+</li>
+<li>
+<{$smarty.const._MD_XSNS_CATEGORY}><br>
+<{$category_selector}>
+</li>
+&nbsp;
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_SEARCH}>">
+</form>
+</ul>
+
+<{if !$is_guest}>
+<a href="<{$xoops_url}>/modules/<{$mydirname}>/?act=add"><{$smarty.const._MD_XSNS_INDEX_ADD}></a>&nbsp;<{$smarty.const._MD_XSNS_INDEX_ADD_DESC}><br>
+<{/if}>
+
+<{$lang.sort}>&nbsp;
+<a href="<{$url.sort_member}>"><{$smarty.const._MD_XSNS_INDEX_SORT_MEMBER}></a>&nbsp;|
+<a href="<{$url.sort_date}>"><{$smarty.const._MD_XSNS_INDEX_SORT_DATE}></a>&nbsp;|
+<a href="<{$url.sort_pop}>"><{$smarty.const._MD_XSNS_INDEX_SORT_POP}></a>&nbsp;|
+<a href="<{$url.sort_up}>"><{$smarty.const._MD_XSNS_INDEX_SORT_UP}></a></br>
+
+<ul>
+<{foreach item=category from=$category_list}>
+<li>
+<{$category.name}><br>
+<{$category.selector}>
+</li>
+<{/foreach}>
+</ul>
+<br>
+
+<!-- Community List -->
+<{$smarty.const._MD_XSNS_INDEX_LIST}><br>
+<ul>
+<{if $commu_list|@count > 0}>
+<li><{$pager.selector}><br>
+<{/if}>
+<{$pager.description}></li>
+
+<{if $commu_list|@count > 0}>
+
+<{/if}>
+
+<{foreach item=commu from=$commu_list}>
+
+	<a href="<{$commu.page_url}>"><img src="<{$commu.image.url_src|default:"images/cm_commu_default1.gif"}>" alt=""></a>
+<li><{$smarty.const._MD_XSNS_COMMU_NAME}><br><{$commu.name}></li>
+<li><{$smarty.const._MD_XSNS_MEMBER_COUNT}> <{$commu.member_count}></li>
+<li><{$smarty.const._MD_XSNS_INDEX_DETAIL_DESC}><br><{$commu.info|mb_truncate:200}></li>
+<li><{$smarty.const._MD_XSNS_CATEGORY}> <{$commu.category_name}></li>
+<li><a href="<{$commu.page_url}>"><{$smarty.const._MD_XSNS_INDEX_DETAIL}></a></li>
+<hr>
+<{/foreach}>
+
+<{if $commu_list|@count > 0}>
+<{$pager.selector}> <{$pager.description}><br>
+<{/if}>
+
+</div>

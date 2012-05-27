@@ -1,0 +1,25 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+
+<ul>
+<p><{$smarty.const._MD_XSNS_TITLE_TOPIC_RES_ADD}></p>
+<li><{$smarty.const._MD_XSNS_TOPIC}></br>
+<{$topic.name}></li>
+
+<li><{$smarty.const._MD_XSNS_TOPIC_RESPONSE}><br>
+<{$topic.body}></li>
+
+<form action="index.php" method="post">
+<input name="p" value="topic" type="hidden">
+<input name="act" value="res_exec" type="hidden">
+<input name="tid" value="<{$topic.id}>" type="hidden">
+<{$token_tag}>
+
+<p><{$smarty.const._MD_XSNS_TOPIC_ADD_CONFIRM}></p>
+<p>
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_POST}>">&nbsp;&nbsp;
+</p>
+</form>
+
+
+</div>

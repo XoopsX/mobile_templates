@@ -1,0 +1,26 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+<hr>
+
+<p><{$topic.lang_title}></p>
+
+<ul>
+<li><{$smarty.const._MD_XSNS_TOPIC}><br>
+<{$topic.title}></li>
+
+<{if $topic.number > 0}>
+<li><{$smarty.const._MD_XSNS_TOPIC_RESPONSE_ID}> <{$topic.number}></li>
+<{/if}>
+
+<li><{$smarty.const._MD_XSNS_TOPIC_AUTHOR}> <a href="<{$topic.author_url}>"><{$topic.author_name}></a></li>
+
+<li><{$smarty.const._MD_XSNS_TOPIC_BODY}><br>
+<{$topic.body}></li>
+
+<{$form_topic_del}>
+
+<{$message}><br><br>
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_DEL}>">&nbsp;&nbsp;
+
+</form>
+</div>

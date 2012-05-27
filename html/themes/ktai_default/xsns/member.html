@@ -1,0 +1,18 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+<hr>
+
+<p><{$pager.selector}> <{$pager.description}></p>
+<{$smarty.const._MD_XSNS_TITLE_MEMBER}><br>
+<hr>
+<ul>
+<{foreach item=member from=$member_list}>
+<li><{$smarty.const._MD_XSNS_USER_NAME}> <a href="<{$member.page_url}>"><{$member.name}></a></li>
+<li><{$smarty.const._MD_XSNS_AVATAR}><br><a href="<{$member.page_url}>"><img src="<{$member.avatar_url}>" width="<{$member.avatar_width}>" height="<{$member.avatar_height}>" alt="<{$member.name}>"></a></li>
+<li><{$smarty.const._MD_XSNS_MEMBER_REG_DATE}><br><{$member.time|date_format:"%Y-%m-%d"}></li>
+<li><{$smarty.const._MD_XSNS_MEMBER_LAST_LOGIN}><br><{$member.last_login|date_format:"%Y-%m-%d %H:%M:%S"}></li>
+<hr>
+<{/foreach}>
+</ul>
+<{$pager.selector}> <{$pager.description}>
+</div>

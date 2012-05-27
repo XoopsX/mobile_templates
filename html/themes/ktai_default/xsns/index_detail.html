@@ -1,0 +1,99 @@
+<div id="mainFrame">
+<{$mydirname}>
+<{if $mydirname}>
+<{include file="db:`$mydirname`_inc_breadcrumbs.html"}>
+<{/if}>
+<hr>
+<{if $commu.show_commu_join}>
+<div style="padding:2px;">
+<{$smarty.const._MD_XSNS_INDEX_JOIN_DESC}>&nbsp;&nbsp;&nbsp;<{$smarty.const._MD_XSNS_ARROW}>
+<a href="<{$url.commu_join}>"><{$smarty.const._MD_XSNS_INDEX_JOIN}></a>
+</div>
+<br>
+<{/if}>
+
+<{$commu.name|mb_truncate:25}><br>
+<div style="height:274px;">
+<img src="<{$commu.image.url_src|default:"images/cm_commu_default3.gif"}>" alt="<{$commu.name}>"></a>
+</div><br>
+
+<{$smarty.const._MD_XSNS_COMMU_POPULARITY}> <img src="<{$commu.statistics.popularity.image}>" alt=""> <{$commu.statistics.popularity.value}> pts<br>
+<{$smarty.const._MD_XSNS_COMMU_UPDATE_FREQUENCY}> <img src="<{$commu.statistics.update_frequency.image}>" alt=""> <{$commu.statistics.update_frequency.value}> pts<br>
+</div>
+<br>
+
+<{$smarty.const._MD_XSNS_INDEX_DETAIL_MEMBER_LIST}>
+
+<ul>
+<{section name=id loop=$commu.member_list}>
+<{if $commu.member_list[id].page_url != ""}>
+<li>
+<a href="<{$commu.member_list[id].page_url}>"><{$commu.member_list[id].name}></a>
+</li>
+<{/if}>
+<{/section}>
+</ul>
+
+<a href="<{$url.all_member}>"><{$smarty.const._MD_XSNS_INDEX_DETAIL_ALL_MEMBER}></a><br>
+
+<{if $commu.show_member_config}>
+<a href="<{$url.member_config}>"><{$smarty.const._MD_XSNS_INDEX_DETAIL_EDIT_MEMBER}></a><br>
+<{/if}>
+
+<hr>
+
+<ul>
+	<li><{$smarty.const._MD_XSNS_COMMU_NAME}> <{$commu.name}></li><br>
+	<li><{$smarty.const._MD_XSNS_INDEX_DETAIL_DESC}> <{$commu.info}></li>
+	<li><{$smarty.const._MD_XSNS_INDEX_DETAIL_OPEN_DATE}> <{$commu.time|date_format:"%Y-%m-%d"}></li>
+	<li><{$smarty.const._MD_XSNS_INDEX_DETAIL_AUTHOR}> <a href="<{$commu.admin_url}>"><{$commu.admin_name}></a></li>
+	<li><{$smarty.const._MD_XSNS_CATEGORY}> <{$commu.category}></li>
+	<li><{$smarty.const._MD_XSNS_MEMBER_COUNT}> <{$commu.member_count}><{$smarty.const._MD_XSNS_PERSON}></li>
+	<li><{$smarty.const._MD_XSNS_INDEX_DETAIL_PUBLIC}> <{$commu.public}></li>
+
+	<hr>
+	<{if $commu.show_topic_list}>
+	<{$smarty.const._MD_XSNS_INDEX_DETAIL_TOPIC}>
+	
+	<{foreach item=topic from=$commu.topic_list}>
+	<li>
+	<{$topic.r_date}><a href="<{$topic.page_url}>"><{$topic.name|mb_truncate:30}></a><br>
+	</li>
+	<{/foreach}>
+
+	<{$smarty.const._MD_XSNS_ARROW}>
+	<a href="<{$url.all_topic}>"><{$smarty.const._MD_XSNS_INDEX_DETAIL_ALL_TOPIC}> <{$commu.topic_count|default:0}>)</a><br>
+
+	<{if $commu.show_topic_add}>
+	<{$smarty.const._MD_XSNS_ARROW}>
+	<a href="<{$url.add_topic}>"><{$smarty.const._MD_XSNS_INDEX_DETAIL_ADD_TOPIC}></a><br>
+	<{/if}>
+
+	</ul><br>
+
+	<hr>
+	<{if $commu.show_commu_config || $commu.show_commu_leave}>
+
+	<{if $commu.show_commu_config}>
+	<p><a href="<{$url.commu_config}>"><{$smarty.const._MD_XSNS_INDEX_DETAIL_EDIT_COMMU}></a><br><br></p>
+	<{/if}>
+	
+	<{if $commu.show_commu_leave}>
+	<a href="<{$url.commu_leave}>"><{$smarty.const._MD_XSNS_INDEX_LEAVE}></a>
+	<{/if}>
+
+	<{/if}>
+
+	<{/if}>
+
+</li></ul>
+
+<{if $commu.show_commu_notify}>
+<p>
+<hr>
+
+<{include file="db:legacy_notification_select.html"}>
+</p>
+<{/if}>
+<hr>
+</div>

@@ -1,0 +1,24 @@
+<div id="mainFrame">
+
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+
+<{$smarty.const._MD_XSNS_MYPAGE_TOPIC_LIST_ALL}><br>
+
+<{if $topic_list|@count > 0}>
+
+<p><{$pager.selector}> <{$pager.description}></p>
+<ul>
+<{foreach item=topic from=$topic_list}>
+<li><a href="<{$topic.page_url}>"><b><{$topic.name|mb_truncate:30}></b></a><br>
+<{$smarty.const._MD_XSNS_LAST_UPDATE}><br> <{$topic.time|date_format:"%Y-%m-%d %H:%M:%S"}>
+<br>
+<{/foreach}>
+
+<tr><td colspan="3" class="odd centerH"><{$pager.selector}></td></tr>
+<tr><td colspan="3" class="odd" style="text-align:right;"><{$pager.description}></td></tr>
+</ul>
+<{/if}>
+
+<p><{$pager.selector}> <{$pager.description}></p>
+
+</div>

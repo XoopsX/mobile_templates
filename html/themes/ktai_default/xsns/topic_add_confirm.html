@@ -1,0 +1,40 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+<hr>
+
+<p><{$smarty.const._MD_XSNS_TITLE_TOPIC_ADD}></p>
+
+<p><{$smarty.const._MD_XSNS_TOPIC_TITLE}> <{$topic.name}></p>
+
+<ul>
+<li><{$smarty.const._MD_XSNS_TOPIC_BODY}><br>
+<{$topic.body}></li>
+
+<{if $topic.images|@count > 0 && $mod_config.image_form_limit > 0}>
+<{$smarty.const._MD_XSNS_IMAGE}><br>
+<{foreach item=image from=$topic.images}>
+<img src="<{$image.url_src}>" alt="">&nbsp;
+<{/foreach}>
+<{/if}>
+
+<{if $topic.files|@count > 0 && $mod_config.file_form_limit > 0}>
+<{$smarty.const._MD_XSNS_FILE}><br>
+<ul>
+<{foreach item=file from=$topic.files}>
+<li><{$file.caption|mb_truncate:40:"...":1:1}>&nbsp;(<{$file.size}> bytes.)</li>
+<{/foreach}>
+</ul>
+<{/if}>
+
+<form action="index.php" method="post">
+<input type="hidden" name="p" value="topic">
+<input type="hidden" name="act" value="add_exec">
+<input type="hidden" name="cid" value="<{$commu.id}>">
+<{$token_tag}>
+
+<p><{$smarty.const._MD_XSNS_TOPIC_ADD_CONFIRM}></p>
+<p>
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_ADD}>">&nbsp;&nbsp;
+</form>
+
+</div>

@@ -1,0 +1,215 @@
+<!-- start module contents -->
+<p><{if $mod_config.use_name==1 && $yd_name}><{$yd_name}>
+<{else}><{$yd_uname}>
+<{/if}><{$smarty.const._MD_DIARY_PERSON}></p>
+
+<{if $preview}> <H2><{$smarty.const._MD_PREVIEW}></H2>
+
+<ul>
+<li><{$yd_data.title}> <img src="images/open<{$yd_openarea}>.gif" border=0 /></li>
+
+<{if $yd_before.bid >0}>
+<li><a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=detail&amp;bid=<{$yd_before.bid}>&req_uid=<{$yd_uid}>">
+<img src="<{$xoops_url}>/modules/<{$mydirname}>/images/arrow2.png" border=0 style="vertical-align:middle;" /><{$smarty.const._MD_DIARY_LAST}>
+</a></li>
+<{/if}>
+<{if $yd_after.bid >0}>
+<li><a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=detail&amp;bid=<{$yd_after.bid}>&req_uid=<{$yd_uid}>">
+<{$smarty.const._MD_DIARY_NEXT}><img src="<{$xoops_url}>/modules/<{$mydirname}>/images/arrow1.png" border=0 style="vertical-align:middle;" />
+</a></li>
+<{/if}>
+
+<li><{$smarty.const._MD_DIARY_DATE}>&nbsp;<{$yd_data.year}><{$smarty.const._MD_DATE_YEAR}><{$yd_data.month}><{$smarty.const._MD_DATE_MONTH}><{$yd_data.day}><{$smarty.const._MD_DATE_DAY}><{$yd_data.time}>
+</li>
+
+<li><{$smarty.const._MD_CATEGORY}>&nbsp;
+<a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?req_uid=<{$yd_uid}>&amp;mode=category&amp;cid=<{$yd_data.cid}>">
+<{$yd_data.cname}></a>
+</li>
+
+<{if $mod_config.use_tag>0}>
+<li><{$smarty.const._MD_TAG}>&nbsp;
+<{foreach from=$bTagArr item=tags}>
+	<a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?req_uid=<{$yd_uid}>&amp;tag_name=<{$tags.tag_urlenc}>" style="font-size:<{$tags.size}>%"><{$tags.tag}></a> 
+<{/foreach}>
+<{/if}>
+</li>
+
+<br /><{$yd_data.diary}>
+<{if $yd_photo.0.pid|count_characters>0}> <br />
+<{section name=num loop=$yd_photo}>
+ <{if $yd_photo[num].body_in != true}>
+  <a href="<{$xoops_url}>/modules/<{$mydirname}>/upimg/<{$yd_photo[num].pname}>" target="_blank">
+  <img src="<{$xoops_url}>/modules/<{$mydirname}>/upimg/<{$yd_photo[num].thumbnail}>" style="border:1px solid gray;" /></a>
+  <br />
+  <{* <p><{$smarty.const._MD_PHOTO}><{$num+1}></p> *}>
+  <{if $mod_config.photo_useinfo==1 && $yd_photo[num].info}><p><{$yd_photo[num].info}></p><{/if}>
+  <hr width="95%" />
+ <{/if}>
+<{/section}>
+<br/>
+<{/if}>
+</ul>
+<{/if}>
+
+<hr />
+<{$smarty.const._MD_DIARY_EDIT}><br />
+<img src="images/open<{$yd_openarea}>.gif" border=0 /><br />
+
+<{if $yd_data.error|count_characters > 0}>
+<font color="red"><strong><{$smarty.const._MD_INPUT_ERR}><br/>
+<{$yd_data.error}></strong></font><br/>
+<br/>
+<{/if}>
+
+<form name="fm1" method='POST' action='index.php?page=edit'>
+<{$gticket_hidden}>
+<input type="hidden" name="bid" value="<{$yd_data.bid}>" />
+
+<ul>
+<{$smarty.const._MD_DIARY_TITLE}><br />
+<input type="text" name="title" size="25" value="<{$yd_data.title}>" />
+<{if $yd_data.bid>0}><li><{$smarty.const._MD_DIARY_DATE}><br /><{$yd_data.year}><{$smarty.const._MD_DATE_YEAR}><{$yd_data.month}><{$smarty.const._MD_DATE_MONTH}><{$yd_data.day}><{$smarty.const._MD_DATE_DAY}>
+<{$yd_data.time}></li><{/if}>
+
+<li><{$smarty.const._MD_CATEGORY}></li><br />
+<select name="cid" id="cid" onchange="chgcname()">
+<option value="0"><{$smarty.const._MD_NOCNAME}></option>
+<{section name=num loop=$catopt}>
+    <{if $catopt[num].cid <= 10000}>
+	<option <{if $yd_data.cid==$catopt[num].cid}>selected<{/if}> value="<{$catopt[num].cid}>"><{$catopt[num].cname}><{if $catopt[num].dohtml=="1"}> HTML<{/if}></option>
+    <{/if}>
+<{/section}>
+<{section name=num loop=$catopt}>
+    <{if $catopt[num].cid > 10000}>
+	<option <{if $yd_data.cid==$catopt[num].cid}>selected<{/if}> value="<{$catopt[num].cid}>"><{$catopt[num].cname}><{if $catopt[num].dohtml=="1"}> HTML<{/if}></option>
+    <{/if}>
+<{/section}>
+<option <{if $yd_data.cid=="-1"}>selected<{/if}> value="-1"><{$smarty.const._MD_CATEGORY_ADD}></option>
+</select>
+<input type="text" name="cname" id="cname" size="25" value="<{$yd_data.cname}>" />
+
+
+<{if $yd_use_open_entry}>
+<li><{$smarty.const._MD_CONF_OPENAREA}><br />
+<select name="openarea" id="openarea">
+<option <{if $yd_data.openarea==0}>selected<{/if}> value="0"><{$smarty.const._MD_CONF2_FOLLOW}></option>
+<{if $yd_openarea==0}><option <{if $yd_data.openarea==1}>selected<{/if}> value="1"><{$smarty.const._MD_CONF2_1OLOSE}></option><{/if}>
+<{if $yd_use_friend>=1 && $yd_openarea<=1}><option <{if $yd_data.openarea==3}>selected<{/if}> value="3"><{$smarty.const._MD_CONF2_3FRIEND2}></option><{/if}>
+<{if $yd_use_friend>=1 && ($yd_openarea<=1 || $yd_openarea==3)}><option <{if $yd_data.openarea==2}>selected<{/if}> value="2"><{$smarty.const._MD_CONF2_2FRIEND}></option><{/if}>
+<{if $allow_gpermission}><option <{if $yd_data.openarea==10}>selected<{/if}> value="10"><{$smarty.const._MD_CONF2_10GROUP}></option><{/if}>
+<{if $allow_ppermission}><option <{if $yd_data.openarea==20}>selected<{/if}> value="20"><{$smarty.const._MD_CONF2_20PERSON}></option><{/if}>
+<{if $yd_openarea<=3}><option <{if $yd_data.openarea==100}>selected<{/if}> value="100"><{$smarty.const._MD_CONF2_100HIDE}></option><{/if}>
+</select>
+&nbsp;<{if $yd_data.openarea==100}><input type="checkbox" name="update_time" value="1" /><{$smarty.const._MD_DIARY_UPDATE_TIME}><{/if}>
+<{if $yd_data.openarea <> 0}><img src="images/open<{$yd_data.openarea}>.gif" border=0 style="float:right;" /><{/if}>
+<{/if}>
+
+<li>
+<{if $allow_gpermission || $allow_ppermission}>
+<{$smarty.const._MD_PERMED_VGROUP}><br />
+<select name="vgids[]" size="4" multiple>
+<{strip}><{foreach from=$yd_data.group_list key=groupid item=group}>
+<option value="<{$groupid}>"<{if $group.gsel==1}> selected="selected"<{/if}>><{$group.gname}></option>
+<{/foreach}><{/strip}></select>
+<{/if}>
+</li>
+
+<li>
+<{if $allow_ppermission}>
+<{strip}>
+    <{$smarty.const._MD_DIARY_REG_PERSON}><br />
+    <div id="d3d_tag_list1" class="d3d_tag_list"><{if $yd_data.pperm_names}>
+    <{foreach from=$yd_data.pperm_names item="pname"}><span class="exist"><{$pname}></span><{/foreach}><{/if}></div>
+    <input type="text" name="vpids" id="d3d_tag_hidden1" value="<{$yd_data.pperm_list}>">
+<{/strip}>
+<{/if}>
+</li>
+
+<li><{$smarty.const._MD_DIARY_TEXT}><br />
+<textarea name="diary" id='diary' rows="7" cols="20"><{$yd_data.diary4edit}></textarea>
+
+</li>
+</ul>
+<input type=hidden name="req_uid" value="<{$yd_uid}>"/>
+<input type=submit name="preview" value="<{$smarty.const._MD_PREVIEW}>"/>
+<input type=submit name="submit1" value="<{$smarty.const._MD_SUBMIT}>"/>
+<br/>
+<hr />
+<{$smarty.const._MD_DIARY_OPTION}><br />
+<ul>
+<{if $allow_html}>
+<li><input type="checkbox" name="dohtml" id="dohtml" value="1" <{if $yd_data.dohtml==1}>checked<{/if}> /><{$smarty.const._MD_DO_HTML}><br />
+</li>
+<{else}>
+	<input type="hidden" name="dohtml" id="dohtml" value="0" />
+<{/if}>
+<{if $allow_regdate}>
+<li><input type="checkbox" name="reg_time" id="reg_time" value="1" <{if $yd_data.reg_time==1}>checked<{/if}>/><{$smarty.const._MD_DIARY_REG_TIME}><br />
+<{html_select_date time=$yd_data.create_time_unformat start_year="-1" end_year="+2" month_format="%m" day_format="%d" field_order="YMD" field_array="published"}>
+<{html_select_time time=$yd_data.create_time_unformat minute_interval="10" display_seconds=false field_array="published"}><br /></li>
+<{else}>
+	<input type="hidden" name="reg_time" id="reg_time" value="0" />
+<{/if}>
+<{if $mod_config.use_updateping}>
+<li><input type="checkbox" name="update_ping" id="update_ping" value="1" <{if $yd_data.update_ping==1}>checked<{/if}> /><{$smarty.const._MD_DIARY_UPDATE_PING}><br />
+</li>
+<{else}>
+	<input type="hidden" name="update_ping" id="update_ping" value="0" />
+<{/if}>
+
+<hr />
+<{if $mod_config.use_tag>0}>
+<li><{$smarty.const._MD_TAG}><br />
+<{$smarty.const._MD_TAG_DESC}><br />
+<input type=text name=tags id=tags value="<{foreach from=$bTagArr item=b_tag}>[<{$b_tag.tag}>]<{/foreach}>" size=50 maxlength=255><br />
+</li>
+<{/if}>
+
+<{if $yd_data.photo_num>=1}>
+<{foreach from=$yd_photo key="num" item="photo" name="list"}>
+<li><{$smarty.const._MD_PHOTO}><{$num+1}><br />
+<img src='upimg/<{$photo.thumbnail}>'>
+<input type='hidden' name='pid<{$num}>' id='pid<{$num}>' value='<{$photo.pid}>' />
+<input type='hidden' name='pname<{$num}>' id='pname<{$num}>' value='<{$photo.pname}>' />
+<input type='hidden' name='pid[]' value='<{$photo.pid}>' />
+<input type='hidden' name='pname[]' value='<{$photo.pname}>' />
+<{$smarty.const._MD_PHOTO_SELECT}><input type='checkbox' name='psel[]' value='<{$photo.pid}>::<{$photo.pname}>' />
+<{if $mod_config.photo_useinfo==1}>
+	<textarea name='pvinfo[]' rows="2" cols="50"><{$photo.pinfo}></textarea>
+<{/if}>
+</li>
+<{/foreach}>
+<hr width="95%">
+<{$smarty.const._MD_PHOTO_SELECT}><br />
+	<select name="action" id="action">
+	<option value="0"><{$smarty.const._MD_CATEGORY_NOSELECTED}></option>
+	<option value="2"><{$smarty.const._MD_LROTATE}></option>
+	<option value="3"><{$smarty.const._MD_RROTATE}></option>
+	<option value="5"><{$smarty.const._MD_T_DEL}></option>
+	</select>
+<input type=submit name="phandle" value="<{$smarty.const._SUBMIT}>"/>
+<{/if}>
+
+</ul>
+</form>
+
+<hr />
+<{if $yd_data.bid>0}>
+<p><{$smarty.const._MD_DIARY_DEL}></p>
+<ul>
+<li><{$smarty.const._MD_DIARY_DATE}><br />
+<{$yd_data.year}><{$smarty.const._MD_DATE_YEAR}><{$yd_data.month}><{$smarty.const._MD_DATE_MONTH}><{$yd_data.day}><{$smarty.const._MD_DATE_DAY}> <{$yd_data.time}>
+</li>
+<li><{$smarty.const._MD_DIARY_TITLE}><br />
+<{$yd_data.title}>
+</li>
+<td colspan=2>
+<form name="fm1" method='POST' action='index.php?page=edit'>
+<{$gticket_hidden}>
+<input type="hidden" name="bid" value="<{$yd_data.bid}>" />
+<{$smarty.const._MD_DIARY_DELDEC}>¡£<br />
+<input type=submit name="delsub" value="<{$smarty.const._MD_DIARY_DEL}>"/>
+</ul>
+<{/if}>
+

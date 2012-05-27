@@ -1,0 +1,24 @@
+<div id="mainFrame">
+
+<!-- User Menu -->
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<p><{$smarty.const._MD_XSNS_FRIEND_ADD}></p>
+<ul>
+<{$smarty.const._MD_XSNS_FRIEND_ADD_DESC}><br>
+<li><a href="<{$user.page_url}>"><img src="<{$user.avatar_url}>" width="<{$user.avatar_width}>" height="<{$user.avatar_height}>" alt=""></a>
+</li>
+<li><{$smarty.const._MD_XSNS_USER_NAME}> <a href="<{$user.page_url}>"><{$user.name}></a></li>
+<li><{$smarty.const._MD_XSNS_MEMBER_LAST_LOGIN}><br><{$user.last_login|date_format:"%Y-%m-%d %H:%M:%S"}></li>
+
+<{$form_friend_add_submit}>
+<p>
+<{$smarty.const._MD_XSNS_MEMBER_REQUEST_MESSAGE}> :<br>
+<textarea name="message" cols="40" rows="5"></textarea><br>
+</p>
+<p>
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_SEND}>">&nbsp;&nbsp;
+</p>
+</form>
+
+</div>

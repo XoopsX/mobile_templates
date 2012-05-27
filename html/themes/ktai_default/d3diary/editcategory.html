@@ -1,0 +1,118 @@
+<{if $mod_config.show_breadcrumbs}>
+<div id="d3d_breadcrumbs">
+	<a href="<{$xoops_url}>/">TOP</a>
+	<{foreach from=$xoops_breadcrumbs key="i" item="item"}>
+	    <{* if $i!=0 *}>
+		&nbsp;>&nbsp;
+		<{if $item.url}>
+			<a href="<{$item.url}>"><{$item.name}></a>
+		<{else}>
+			<{$item.name}>
+		<{/if}>
+	    <{* /if *}>
+	<{/foreach}>
+</div><br/>
+<{/if}>
+
+<{if $mod_config.use_name==1 && $yd_name}><{$yd_name}>
+	<{else}><{$yd_uname}>
+	<{/if}><{$smarty.const._MD_DIARY_PERSON}><br/>
+<br/>
+
+
+<form method='POST' action='index.php?page=editcategory' onsubmit="return inputchk(this)">
+<{$smarty.const._MD_CATEGORY_ADD_DO}><br />
+<{$smarty.const._MD_CATEGORY}><br />
+<{$smarty.const._MD_CATEGORY_ADDREQ}><br />
+<input type="hidden" name="common_cat" value="1" />
+<input type="text" name="cname" size="20" /><input type="submit" name="createsub" value="<{$smarty.const._MD_SUBMIT}>" />
+</form>
+
+<hr />
+
+
+<{$smarty.const._MD_CATEGORY_EDIT}><br />
+<{$smarty.const._MD_CATEGORY_SWAPDSC}><br />
+<{section name=num loop=$yd_category}>
+
+<form method='POST' action='index.php?page=editcategory' style="display:inline;">
+<input type="text" name="cname" size="20" value="<{$yd_category[num].cname}>"/><br />
+<{$smarty.const._MD_CATEGORY_ORDER}><input type="text" name="corder" size="3" value="<{$yd_category[num].corder}>"/><br />
+SUB<input type="checkbox" name="subcat" value="1" <{if $yd_category[num].subcat==1 }>"checked=checked"<{/if}> />
+<input type="hidden" name="cid" value="<{$yd_category[num].cid}>" /><br />
+<input type="submit" name="editsub" value="<{$smarty.const._MD_SUBMIT}>" /><br />
+</form>
+
+<form method='POST' action='index.php?page=editcategory' style="display:inline;">
+<input type="hidden" name="cid" value="<{$yd_category[num].cid}>" />
+<input type="submit" name="delsub" value="<{$smarty.const._MD_T_DEL}>" />
+</form>
+
+<{if $yd_use_open_cat}>
+<form method='POST' action='index.php?page=editcat_config' style="display:inline;">
+<input type="hidden" name="cid" value="<{$yd_category[num].cid}>" />
+<input type="submit" name="dispsub" value="<{$smarty.const._MD_CAT_CONF}>" />
+</form>
+
+<{if $yd_category[num].blogtype > 0}>
+<a href="<{$yd_category[num].blogurl}>" target="_blank">
+<img src="<{$xoops_url}>/modules/<{$mydirname}>/images/door_out.gif" border=0 style="vertical-align:middle;" /></a> 
+<{/if}>
+<{if $yd_category[num].openarea >0}><img src="images/open<{$yd_category[num].openarea}>.gif" border=0 /><{/if}>
+<{/if}>
+
+<hr />
+<{/section}>
+
+<{if $yd_isadmin}>
+<p><{$smarty.const._MD_CATEGORY_COMMON}></p>
+<hr />
+
+<form method='POST' action='index.php?page=editcategory' onsubmit="return inputchk(this)">
+<{$smarty.const._MD_CATEGORY_ADD_DO}><br />
+<{$smarty.const._MD_CATEGORY}><br />
+<{$smarty.const._MD_CATEGORY_ADDREQ}><br />
+<input type="text" name="cname" size="20" /><input type="submit" name="createsub" value="<{$smarty.const._MD_SUBMIT}>" />
+</form>
+
+<hr />
+
+
+<{$smarty.const._MD_CATEGORY_EDIT}><br />
+<{$smarty.const._MD_CATEGORY_SWAPDSC}><br />
+<{section name=num loop=$yd_common_cat}>
+
+
+<form method='POST' action='index.php?page=editcategory' style="display:inline;">
+<input type="hidden" name="common_cat" value="1" />
+<input type="text" name="cname" size="20" value="<{$yd_common_cat[num].cname}>"/><br />
+<{$smarty.const._MD_CATEGORY_ORDER}><input type="text" name="corder" size="3" value="<{$yd_common_cat[num].corder}>"/><br />
+SUB<input type="checkbox" name="subcat" value="1" <{if $yd_common_cat[num].subcat==1 }>"checked=checked"<{/if}> />
+<input type="hidden" name="cid" value="<{$yd_common_cat[num].cid}>" /><br />
+<input type="submit" name="editsub" value="<{$smarty.const._MD_SUBMIT}>" /><br />
+</form>
+
+<form method='POST' action='index.php?page=editcategory' style="display:inline;">
+<input type="hidden" name="common_cat" value="1" />
+<input type="hidden" name="cid" value="<{$yd_common_cat[num].cid}>" />
+<input type="submit" name="delsub" value="<{$smarty.const._MD_T_DEL}>" />
+</form>
+
+<{if $yd_use_open_cat}>
+<form method='POST' action='index.php?page=editcat_config' style="display:inline;">
+<input type="hidden" name="common_cat" value="1" />
+<input type="hidden" name="cid" value="<{$yd_common_cat[num].cid}>" />
+<input type="submit" name="dispsub" value="<{$smarty.const._MD_CAT_CONF}>" />
+</form>
+
+<{if $yd_common_cat[num].blogtype > 0}>
+<a href="<{$yd_common_cat[num].blogurl}>" target="_blank">
+<img src="<{$xoops_url}>/modules/<{$mydirname}>/images/door_out.gif" border=0 style="vertical-align:middle;" /></a> 
+<{/if}>
+<{if $yd_common_cat[num].openarea >0}><img src="images/open<{$yd_common_cat[num].openarea}>.gif" border=0 /><{/if}>
+<{/if}>
+
+<hr />
+<{/section}>
+<{/if}>
+

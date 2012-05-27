@@ -1,0 +1,17 @@
+<div id="mainFrame">
+
+<!-- User Menu -->
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<p><{$smarty.const._MD_XSNS_FRIEND_DELETE}></p>
+<ul>
+<li><{$smarty.const._MD_XSNS_FRIEND_DELETE_DESC}></li>
+
+<li><{$smarty.const._MD_XSNS_USER_NAME}> <a href="<{$friend.page_url}>"><{$friend.name}></a><br>
+<a href="<{$friend.page_url}>"><img src="<{$friend.avatar_url}>" width="<{$friend.avatar_width}>" height="<{$friend.avatar_height}>" alt=""></a></li>
+<li><{$smarty.const._MD_XSNS_MEMBER_LAST_LOGIN}> <{$friend.last_login|date_format:"%Y-%m-%d %H:%M:%S"}></li>
+</ul>
+<{$form_friend_del}>
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_SEND}>">&nbsp;&nbsp;
+
+</div>

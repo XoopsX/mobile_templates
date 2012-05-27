@@ -1,0 +1,35 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+<hr>
+
+<p><{$smarty.const._MD_XSNS_TITLE_INDEX_ADD}></p>
+
+<p><{$smarty.const._MD_XSNS_INDEX_ADD_CONFIRM}></p>
+
+<ul>
+<li>
+<{$smarty.const._MD_XSNS_COMMU_NAME}><br>
+<{$commu.name}></li>
+
+<li><{$smarty.const._MD_XSNS_CATEGORY}><br>
+<{$commu.category}></li>
+
+<li><{$smarty.const._MD_XSNS_INDEX_PUBLIC}><br>
+<{$commu.public}></li>
+
+<li><{$smarty.const._MD_XSNS_DESC}><br>
+<{$commu.info}></li>
+</ul>
+
+<{if $commu.image|@count > 0}>
+<{$smarty.const._MD_XSNS_IMAGE}><br>
+<{foreach item=image from=$commu.image}>
+<img src="<{$image.url_src}>" alt=""><br>
+<{/foreach}>
+<{/if}>
+
+<{$form_commu_add_submit}>
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_ADD}>">&nbsp;&nbsp;
+</form>
+
+</div>

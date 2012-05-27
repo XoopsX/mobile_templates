@@ -1,0 +1,150 @@
+<!-- start right block contents -->
+
+<{if $mod_config.use_avatar && $yd_avaterurl}>
+<hr />
+<{$smarty.const._MD_AVATAR}><br />
+<div style=text-align:center;>
+<img src="<{$yd_avaterurl}>">
+</div>
+<{/if}>
+
+<{if $yd_owner==1}>
+<hr />
+<p><{$smarty.const._MD_SETTING}><{$smarty.const._MD_T_EDIT}></p>
+
+<ul>
+<li><a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=usr_config">
+<img src="<{$xoops_url}>/modules/<{$mydirname}>/images/arrow1.png" border=0 />
+<{$smarty.const._MD_T_TOTAL}><{$smarty.const._MD_T_EDIT}>
+</a></li>
+
+<li><a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=editcategory">
+<img src="<{$xoops_url}>/modules/<{$mydirname}>/images/arrow1.png" border=0 />
+<{$smarty.const._MD_CATEGORY}><{$smarty.const._MD_T_EDIT}>
+</a></li>
+
+<li><a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=edit">
+<img src="<{$xoops_url}>/modules/<{$mydirname}>/images/pencil.gif" border=0 />
+<{$smarty.const._MD_NEWENTRY}>
+</a></li>
+
+<li><a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=mailpost">
+<img src="<{$xoops_url}>/modules/<{$mydirname}>/images/arrow1.png" border=0 />
+<{$smarty.const._MD_MAIL_OPENMANUAL}>
+</a></li>
+<{/if}>
+
+<hr />
+<{$yd_cal_month}><{$smarty.const._MD_CTITLE}>
+<table class="outer" style="text-align:center;">
+<{$yd_calender}>
+</table>
+<br />
+<hr />
+
+<p><{$smarty.const._MD_CATEGORY}></p>
+<{section name=num loop=$catopt}>
+<{if $catopt[num].cid<=10000}>
+	<li<{if $catopt[num].subcat==1}> style="margin-left:12px !important;"<{/if}>>
+	<{if $catopt[num].blogtype>0 && $catopt[num].cid>0}>
+	<a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=other&amp;req_uid=<{$yd_uid}>&amp;cid=<{$catopt[num].cid}>"><{$catopt[num].cname}></a>
+	<img src="<{$xoops_url}>/modules/<{$mydirname}>/images/door_out.gif" border=0 style="vertical-align:middle;" /> 
+	<{else}>
+	<a href="<{$url4ex_cat}>&amp;mode=category&amp;cid=<{$catopt[num].cid}>"><{$catopt[num].cname}>(<{$catopt[num].num}>)</a>
+	<{/if}>
+	</li>
+<{/if}>
+<{/section}>
+<hr widh="70%" />
+<{section name=num loop=$catopt}>
+<{if $catopt[num].cid>10000}>
+	<li<{if $catopt[num].subcat==1}> style="margin-left:12px !important;"<{/if}>>
+	<{if $catopt[num].blogtype>0}>
+	<a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=other&amp;req_uid=<{$yd_uid}>&amp;cid=<{$catopt[num].cid}>"><{$catopt[num].cname}></a>
+	<img src="<{$xoops_url}>/modules/<{$mydirname}>/images/door_out.gif" border=0 style="vertical-align:middle;" /> 
+	<{else}>
+	<a href="<{$url4ex_cat}>&amp;mode=category&amp;cid=<{$catopt[num].cid}>"><{$catopt[num].cname}>(<{$catopt[num].num}>)</a>
+	<{/if}>
+	</li>
+<{/if}>
+<{/section}>
+
+<{if $yd_owner==1 && $yd_editperm==1}>
+<li><a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=editcategory">
+<img src="<{$xoops_url}>/modules/<{$mydirname}>/images/arrow1.png" border=0 style="vertical-align:middle;" />
+<{$smarty.const._MD_CATEGORY_EDIT}></a></li>
+<{/if}>
+<br />
+<hr />
+
+<li><{$smarty.const._MD_PAGE_ACCESS}><br />
+<{$yd_counter}> / <{$smarty.const._MD_T_TOTAL}></li>
+<hr />
+<li><{$smarty.const._MD_DIARY_RECENT}><br />
+<{section name=num loop=$yd_list max=7}>
+<li><{if $yd_list[num].other==1}>
+<img src="<{$xoops_url}>/modules/<{$mydirname}>/images/door_out.gif" border=0 style="vertical-align:middle;" /> 
+<a href="<{$yd_list[num].url}>" target="_blank"><{$yd_list[num].title}></a>
+<{else}>
+<a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=detail&amp;bid=<{$yd_list[num].bid}>&req_uid=<{$yd_uid}>"><{$yd_list[num].title}></a>
+<{/if}></li>
+<{/section}>
+<img src="<{$xoops_url}>/modules/<{$mydirname}>/images/arrow1.png" border=0 style="vertical-align:middle;" /> <a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?req_uid=<{$yd_uid}>"><{$smarty.const._MD_MORE}></a>
+</li>
+<br />
+<hr />
+
+<li><{$smarty.const._MD_COM_RECENT}><br />
+ <{section name=num loop=$yd_comment max=7}>
+<li><a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=detail&amp;bid=<{$yd_comment[num].bid}><{$yd_com_key}><{$yd_comment[num].unique_path}>"><{$yd_comment[num].title}></a>&nbsp;
+	<{if $mod_config.use_name==1 && $yd_comment[num].name}><{$yd_comment[num].name}>
+	<{else}><{$yd_comment[num].uname}>
+	<{/if}>[<{$yd_comment[num].datetime|formatTimestamp:'m-d H:i'}>]
+</li>
+<{/section}>
+<img src="<{$xoops_url}>/modules/<{$mydirname}>/images/arrow1.png" border=0 style="vertical-align:middle;" />
+	 <a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=viewcomment&amp;req_uid=<{$yd_uid}>"><{$smarty.const._MD_COMMENT_LIST}></a>
+</li>
+<br />
+<hr />
+<li><{$smarty.const._MD_DATE_EACHMONTH}><{$smarty.const._MD_DIARY_TITLENAME}><br />
+<{section name=num loop=$yd_monlist}>
+<li><a href="<{$url4ex_date}>&amp;year=<{$yd_monlist[num].year}>&amp;month=<{$yd_monlist[num].month}>">
+<{$yd_monlist[num].year}><{$smarty.const._MD_DATE_YEAR}><{$yd_monlist[num].month}><{$smarty.const._MD_DATE_MONTH}>
+</a>(<{$yd_monlist[num].count}>)
+</li>
+<{/section}>
+<{if $yd_monthnavi}><{$yd_monthnavi}><{/if}>
+</li>
+<br />
+<hr />
+
+<{if $yd_friends}>
+<li><{if $mod_config.use_name==1 && $yd_name}><{$yd_name}>
+	<{else}><{$yd_uname}>
+	<{/if}><{$smarty.const._MD_DIARY_FRIENDS}>
+<ul>
+<{section name=num loop=$yd_friends}>
+<li>
+<a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?req_uid=<{$yd_friends[num].uid}>">
+<{if $mod_config.use_name==1 && $yd_friends[num].name}><{$yd_friends[num].name}>
+<{else}><{$yd_friends[num].uname}>
+<{/if}></a>(<{$yd_friends[num].count}>)
+</li>
+<{/section}>
+</ul>
+<{if $yd_friendsnavi}><{$yd_friendsnavi}><{/if}>
+<img src="<{$xoops_url}>/modules/<{$mydirname}>/images/arrow1.png" border=0 style="vertical-align:middle;" /> <a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?mode=friends&req_uid=<{$yd_uid}>"><{$smarty.const._MD_DIARY_FRIENDSVIEW}></a>
+</li>
+<br />
+<hr />
+<{/if}>
+
+<li><{$smarty.const._MD_RSS_LINK}><br />
+<{$yd_uname}><{$smarty.const._MD_DIARY_PERSON}><br />
+<a href="<{$xoops_url}>/modules/<{$mydirname}>/rdf.php?uid=<{$yd_uid}>&amp;cid=<{$yd_cid}>">
+<img src="<{$xoops_url}>/modules/<{$mydirname}>/images/rss10.png" border=0 />
+</a></li>
+<br />
+</ul>
+

@@ -1,0 +1,29 @@
+<div id="mainFrame">
+<{if $mydirname}><{include file="db:`$mydirname`_inc_breadcrumbs.html"}><{/if}>
+<hr>
+
+<{$form_commu_join}>
+
+<p>[<{$commu.name}>] <{$smarty.const._MD_XSNS_TITLE_INDEX_JOIN}></p>
+
+<{if $commu.is_public}>
+
+<p><{$smarty.const._MD_XSNS_INDEX_JOIN_DESC}></p>
+<p>
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_INDEX_JOIN}>">&nbsp;&nbsp;
+</p>
+
+<{else}>
+
+<p><{$smarty.const._MD_XSNS_INDEX_JOIN_DESC_AUTH}></p>
+
+<{$smarty.const._MD_XSNS_INDEX_JOIN_MESSAGE}><br>
+<textarea name="message" cols="60" rows="5"></textarea>
+
+<input type="submit" class="submit" value="<{$smarty.const._MD_XSNS_BTN_INDEX_JOIN_REQUEST}>">&nbsp;&nbsp;
+
+<{/if}>
+
+
+</form>
+</div>

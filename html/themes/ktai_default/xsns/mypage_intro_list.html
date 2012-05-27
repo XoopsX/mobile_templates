@@ -1,0 +1,27 @@
+<div id="mainFrame">
+
+<{if $mydirname}><{include file="db:`$mydirname`_inc_mypage_menu.html"}><{/if}>
+
+<p><{$smarty.const._MD_XSNS_TITLE_MYPAGE_INTRO_LIST}></p>
+
+<{if $intro_list|@count > 0}>
+<{$pager.selector}> <{$pager.description}>
+<hr>
+
+
+<ul>
+<{foreach item=intro from=$intro_list}>
+<li><{$smarty.const._MD_XSNS_USER_NAME}> <a href="<{$intro.user_from.page_url}>"><{$intro.user_from.name}></a>
+<{$smarty.const._MD_XSNS_AVATAR}> <a href="<{$intro.user_from.page_url}>"><img src="<{$intro.user_from.avatar_url}>"></a>
+<ul><li><{$smarty.const._MD_XSNS_MYPAGE_INTRO_BODY}><br><{$intro.body}></li>
+<{if $is_xoops_admin || $intro.user_from.uid==$uid_from || $uid_to==$uid_from}>
+<li><a href="<{$url.intro_delete}><{$intro.user_from.uid}>"><{$smarty.const._MD_XSNS_MYPAGE_INTRO_DEL}></a></li><{/if}>
+</ul>
+</li>
+<{/foreach}>
+</ul>
+<{$pager.selector}> <{$pager.description}>
+
+<{/if}>
+
+</div>
