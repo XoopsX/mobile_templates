@@ -1,5 +1,5 @@
 <div style="font-size: small;">
-<ul>
+<ul data-role="listview" data-inset="true">
   <li><a class="menuTop" href="<{$xoops_url}>/user.php"><{$smarty.const._MB_LEGACY_VACNT}></a></li>
   <li><a href="<{$xoops_url}>/edituser.php"><{$smarty.const._MB_LEGACY_EACNT}></a></li>
   <li><a href="<{$xoops_url}>/notifications.php"><{$smarty.const._MB_LEGACY_NOTIF}></a></li>
@@ -11,8 +11,8 @@
       <li><a href="<{$block.inbox_url}>"><{$smarty.const._MB_LEGACY_INBOX}></a></li>
     <{/if}>
   <{/if}>
-  <{*    <{if $block.show_adminlink}>
-        <a href="<{$xoops_url}>/admin.php"><{$smarty.const._MB_LEGACY_ADMENU}></a>
-      <{/if}>  *}>
+  <{if ($smarty.const.HYP_K_TAI_RENDER == 2 && $block.show_adminlink)}>
+    <li><a href="<{$xoops_url}>/admin.php"><{$smarty.const._MB_LEGACY_ADMENU}></a></li>
+  <{/if}>
 </ul>
 </div>

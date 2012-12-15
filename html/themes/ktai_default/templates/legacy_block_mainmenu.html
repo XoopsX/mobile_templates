@@ -1,3 +1,25 @@
+<{if ($smarty.const.HYP_K_TAI_RENDER == 2)}>
+<!-- jqm -->
+<!--
+<a href="<{$xoops_url}>/" id="mainmenu" data-role="button" data-icon="home"><{$smarty.const._MB_LEGACY_HOME}></a><br />
+-->
+<ul data-role="listview" data-inset="true">
+<!-- start module menu loop -->
+<{foreach item=module from=$block.modules name=main}>
+	<li>
+	<a href="<{$xoops_url}>/modules/<{$module.directory}>/"><{$module.name}></a>
+	<{if $module.sublinks}>
+		<{foreach item=sublink from=$module.sublinks}>
+		<li><a href="<{$sublink.url}>" style="margin-left:1em;"><{$sublink.name}></a></li>
+		<{/foreach}>
+	<{/if}>
+	</li>
+<{/foreach}>
+</ul>
+
+<{else}>
+
+<!-- k-tai -->
 <a class="menuTop" href="<{$xoops_url}>/"><{$smarty.const._MB_LEGACY_HOME}></a>
 <{foreach item=module from=$block.modules}>
   <a class="menuMain" href="<{$xoops_url}>/modules/<{$module.directory}>/"><{$module.name}></a>
@@ -11,3 +33,4 @@
 <{/if}>
 <{/foreach}>
 
+<{/if}>
