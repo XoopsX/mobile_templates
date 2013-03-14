@@ -12,8 +12,8 @@
 </form>
 
 
+<{if $postcomment_link}>
 <form method="get" action="<{$postcomment_link|xoops_escape:link}><{$link_extra|xoops_escape:link}>">
-  <{if $postcomment_link}>
 	<input type="submit" class="formButton" value="<{$smarty.const._CM_POSTCOMMENT}>" />
-  <{/if}>
-
+</form>
+<{/if}>
