@@ -20,7 +20,7 @@
 <br/>
 
 
-<form method='POST' action='index.php?page=editcategory' onsubmit="return inputchk(this)">
+<form method='POST' action='index.php?page=editcategory<{$query_req_uid}>' onsubmit="return inputchk(this)">
 <{$smarty.const._MD_CATEGORY_ADD_DO}><br />
 <{$smarty.const._MD_CATEGORY}><br />
 <{$smarty.const._MD_CATEGORY_ADDREQ}><br />
@@ -35,7 +35,7 @@
 <{$smarty.const._MD_CATEGORY_SWAPDSC}><br />
 <{section name=num loop=$yd_category}>
 
-<form method='POST' action='index.php?page=editcategory' style="display:inline;">
+<form method='POST' action='index.php?page=editcategory<{$query_req_uid}>' style="display:inline;">
 <input type="text" name="cname" size="20" value="<{$yd_category[num].cname}>"/><br />
 <{$smarty.const._MD_CATEGORY_ORDER}><input type="text" name="corder" size="3" value="<{$yd_category[num].corder}>"/><br />
 SUB<input type="checkbox" name="subcat" value="1" <{if $yd_category[num].subcat==1 }>"checked=checked"<{/if}> />
@@ -43,13 +43,13 @@ SUB<input type="checkbox" name="subcat" value="1" <{if $yd_category[num].subcat=
 <input type="submit" name="editsub" value="<{$smarty.const._MD_SUBMIT}>" /><br />
 </form>
 
-<form method='POST' action='index.php?page=editcategory' style="display:inline;">
+<form method='POST' action='index.php?page=editcategory<{$query_req_uid}>' style="display:inline;">
 <input type="hidden" name="cid" value="<{$yd_category[num].cid}>" />
 <input type="submit" name="delsub" value="<{$smarty.const._MD_T_DEL}>" />
 </form>
 
 <{if $yd_use_open_cat}>
-<form method='POST' action='index.php?page=editcat_config' style="display:inline;">
+<form method='POST' action='index.php?page=editcat_config<{$query_req_uid}>' style="display:inline;">
 <input type="hidden" name="cid" value="<{$yd_category[num].cid}>" />
 <input type="submit" name="dispsub" value="<{$smarty.const._MD_CAT_CONF}>" />
 </form>

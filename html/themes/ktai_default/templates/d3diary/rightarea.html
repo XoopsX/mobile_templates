@@ -8,27 +8,29 @@
 </div>
 <{/if}>
 
-<{if $yd_owner==1}>
+<{if $yd_editperm==1}>
 <hr />
 <p><{$smarty.const._MD_SETTING}><{$smarty.const._MD_T_EDIT}></p>
 
 <ul>
-<li><a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=usr_config">
+<li><a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=usr_config<{$query_req_uid}>">
 <img src="<{$xoops_url}>/modules/<{$mydirname}>/images/arrow1.png" border=0 />
 <{$smarty.const._MD_T_TOTAL}><{$smarty.const._MD_T_EDIT}>
 </a></li>
 
-<li><a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=editcategory">
+<li><a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=editcategory<{$query_req_uid}>">
 <img src="<{$xoops_url}>/modules/<{$mydirname}>/images/arrow1.png" border=0 />
 <{$smarty.const._MD_CATEGORY}><{$smarty.const._MD_T_EDIT}>
 </a></li>
 
+<{if $yd_owner==1 }>
 <li><a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=edit">
 <img src="<{$xoops_url}>/modules/<{$mydirname}>/images/pencil.gif" border=0 />
 <{$smarty.const._MD_NEWENTRY}>
 </a></li>
+<{/if}>
 
-<li><a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=mailpost">
+<li><a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=mailpost<{$query_req_uid}>">
 <img src="<{$xoops_url}>/modules/<{$mydirname}>/images/arrow1.png" border=0 />
 <{$smarty.const._MD_MAIL_OPENMANUAL}>
 </a></li>

@@ -65,7 +65,7 @@
 <{/if}>
 </ul>
 <{if $yd_editperm==1}>
-<a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=edit&amp;bid=<{$yd_data.bid}><{if $yd_owner!=1}>&amp;req_uid=<{$yd_uid}><{/if}>">
+<a href="<{$xoops_url}>/modules/<{$mydirname}>/index.php?page=edit&amp;bid=<{$yd_data.bid}><{$query_req_uid}>">
 
 <{$smarty.const._MD_T_EDIT}></a>&nbsp;|&nbsp;
 <{/if}>
