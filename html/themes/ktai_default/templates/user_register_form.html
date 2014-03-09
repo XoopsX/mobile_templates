@@ -68,6 +68,16 @@
     </dd>
   </dl>
   <{/if}>
+  <{if $validators}>
+  <dl>
+  <{foreach from=$validators item=validator}>
+    <dt><{$validator.caption}></dt>
+    <dd>
+      <{$validator.element}>
+    </dd>
+  <{/foreach}>
+  </dl>
+  <{/if}>
   <div>
     <input type="submit" value="<{$smarty.const._MD_USER_LANG_SUBMIT}>" />
   </div>
