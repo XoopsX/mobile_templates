@@ -1,7 +1,7 @@
 <?php
 
 $modversion['name'] = 'Mobile(ktai_default) templates';
-$modversion['version'] = 1.02;
+$modversion['version'] = 1.03;
 $modversion['description'] = 'Templates set under the ktai_default theme';
 $modversion['author'] = 'XCL XOOPS X (ten) DISTRIBUTION TEAM';
 $modversion['credits'] = 'https://github.com/XoopsX';
