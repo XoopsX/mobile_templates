@@ -42,6 +42,17 @@
 <br />
 <{if $common_cat !=1}><{$smarty.const._MD_CONF_BSELECTDESC}><br /><br /><{/if}>
 <hr />
+
+<{if $mod_config.enable_showoption}>
+<strong><{$smarty.const._MD_CATEGORY_SHOWOPTION}></strong><br />
+<select name="showoption" id="showoption">
+<option value=0 <{if $yd_cfg.showoption==0}> selected="selected"<{/if}>><{$smarty.const._MD_CATEGORY_SHOWOPTION0}></option>
+<option value=1 <{if $yd_cfg.showoption==1}> selected="selected"<{/if}>><{$smarty.const._MD_CATEGORY_SHOWOPTION1}></option>
+<option value=3 <{if $yd_cfg.showoption==3}> selected="selected"<{/if}>><{$smarty.const._MD_CATEGORY_SHOWOPTION3}></option>
+</select>
+<{/if}>
+<hr />
+
 <{if $allow_gpermission || $allow_ppermission}><br />
 <{$smarty.const._MD_PERMED_VGROUP}><br />
 <select name="vgids[]" id="groups" size="4" multiple>
